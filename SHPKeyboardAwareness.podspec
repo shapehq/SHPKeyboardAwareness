@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
   s.homepage         = "https://github.com/shapehq/SHPKeyboardAwareness"
   s.license          = 'MIT'
   s.author           = { "Mikkel Selsøe" => "mikkel@shape.dk" }
-  s.source           = { :git => "git@github.com:shapehq/SHPKeyboardAwareness.git", :tag => s.version.to_s }
+  s.source           = { :git => "https://github.com/shapehq/SHPKeyboardAwareness.git", :tag => s.version.to_s }
 
   s.platform     = :ios, '7.0'
   s.requires_arc = true
