@@ -13,6 +13,7 @@
 		761967FE1A2EFBFD005FBE09 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 761967FC1A2EFBFD005FBE09 /* LaunchScreen.xib */; };
 		761968151A2EFD61005FBE09 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 761968141A2EFD61005FBE09 /* ViewController.m */; };
 		7648F3C71A76C70500DAEB0E /* AdvancedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7648F3C61A76C70500DAEB0E /* AdvancedViewController.m */; };
+		76B533A11AC962190087EAB7 /* UITextField+Pretty.m in Sources */ = {isa = PBXBuildFile; fileRef = 76B533A01AC962190087EAB7 /* UITextField+Pretty.m */; };
 		961D1DC866A4BF84894FB888 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C4414AA3932002D8501D395C /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -29,6 +30,8 @@
 		761968141A2EFD61005FBE09 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		7648F3C51A76C70500DAEB0E /* AdvancedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdvancedViewController.h; sourceTree = "<group>"; };
 		7648F3C61A76C70500DAEB0E /* AdvancedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvancedViewController.m; sourceTree = "<group>"; };
+		76B5339F1AC962190087EAB7 /* UITextField+Pretty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+Pretty.h"; sourceTree = "<group>"; };
+		76B533A01AC962190087EAB7 /* UITextField+Pretty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+Pretty.m"; sourceTree = "<group>"; };
 		C4414AA3932002D8501D395C /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC4B253A8AC78D86FAA80CF1 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -75,6 +78,8 @@
 				761968141A2EFD61005FBE09 /* ViewController.m */,
 				7648F3C51A76C70500DAEB0E /* AdvancedViewController.h */,
 				7648F3C61A76C70500DAEB0E /* AdvancedViewController.m */,
+				76B5339F1AC962190087EAB7 /* UITextField+Pretty.h */,
+				76B533A01AC962190087EAB7 /* UITextField+Pretty.m */,
 			);
 			path = SHPKeyboardAwareness;
 			sourceTree = "<group>";
@@ -211,6 +216,7 @@
 			files = (
 				7648F3C71A76C70500DAEB0E /* AdvancedViewController.m in Sources */,
 				761968151A2EFD61005FBE09 /* ViewController.m in Sources */,
+				76B533A11AC962190087EAB7 /* UITextField+Pretty.m in Sources */,
 				761967F01A2EFBFD005FBE09 /* AppDelegate.m in Sources */,
 				761967ED1A2EFBFD005FBE09 /* main.m in Sources */,
 			);

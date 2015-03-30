@@ -7,6 +7,7 @@
 
 #import "ViewController.h"
 #import "SHPKeyboardAwareness.h"
+#import "UITextField+Pretty.h"
 
 @interface ViewController () <SHPKeyboardAwarenessClient, UITextFieldDelegate>
 
@@ -37,6 +38,7 @@
     
     // Save the bottom constraint so that we can animate it when the keyboard appears
     self.bottomConstraint = [NSLayoutConstraint constraintWithItem:self.textField attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1 constant:-150];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.textField attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:36.0]];
     
     [self.view addConstraint:self.bottomConstraint];
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.textField attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeWidth multiplier:1 constant:-100]];
@@ -81,9 +83,7 @@
 
 - (UITextField *)textField {
     if (!_textField) {
-        _textField = [UITextField new];
-        _textField.backgroundColor = [UIColor greenColor];
-        _textField.placeholder = @"Tap me";
+        _textField = [UITextField shp_prettyTextField];
         _textField.delegate = self;
     }
     return _textField;

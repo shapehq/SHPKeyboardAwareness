@@ -7,6 +7,7 @@
 
 #import "AdvancedViewController.h"
 #import "SHPKeyboardAwareness.h"
+#import "UITextField+Pretty.h"
 
 @interface AdvancedViewController () <UITextFieldDelegate>
 
@@ -51,11 +52,14 @@
     [self.containerView addConstraint:[NSLayoutConstraint constraintWithItem:self.textField attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.containerView attribute:NSLayoutAttributeLeft multiplier:1 constant:10]];
     [self.containerView addConstraint:[NSLayoutConstraint constraintWithItem:self.textField attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.containerView attribute:NSLayoutAttributeTop multiplier:1 constant:10]];
     [self.containerView addConstraint:[NSLayoutConstraint constraintWithItem:self.textField attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.containerView attribute:NSLayoutAttributeRight multiplier:1 constant:-10]];
+    [self.containerView addConstraint:[NSLayoutConstraint constraintWithItem:self.textField attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:36.0]];
+
     
     [self.containerView addConstraint:[NSLayoutConstraint constraintWithItem:self.button attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.containerView attribute:NSLayoutAttributeLeft multiplier:1 constant:10]];
     [self.containerView addConstraint:[NSLayoutConstraint constraintWithItem:self.button attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.textField attribute:NSLayoutAttributeBottom multiplier:1 constant:10]];
     [self.containerView addConstraint:[NSLayoutConstraint constraintWithItem:self.button attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.containerView attribute:NSLayoutAttributeRight multiplier:1 constant:-10]];
     [self.containerView addConstraint:[NSLayoutConstraint constraintWithItem:self.button attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.containerView attribute:NSLayoutAttributeBottom multiplier:1 constant:-10]];
+    [self.containerView addConstraint:[NSLayoutConstraint constraintWithItem:self.button attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:36.0]];
 }
 
 #pragma mark - SHPKeyboardAwarenessClient
@@ -98,16 +102,14 @@
 - (UIView *)containerView {
     if (!_containerView) {
         _containerView = [UIView new];
-        _containerView.backgroundColor = [UIColor redColor];
+        _containerView.backgroundColor = [UIColor colorWithRed:16.0f/255.0f green:49.0f/255.0f blue:77.0f/255.0f alpha:1.0];
     }
     return _containerView;
 }
 
 - (UITextField *)textField {
     if (!_textField) {
-        _textField = [UITextField new];
-        _textField.backgroundColor = [UIColor greenColor];
-        _textField.placeholder = @"Tap me";
+        _textField = [UITextField shp_prettyTextField];
         _textField.delegate = self;
     }
     return _textField;
@@ -116,7 +118,8 @@
 - (UIButton *)button {
     if (!_button) {
         _button = [UIButton buttonWithType:UIButtonTypeCustom];
-        _button.backgroundColor = [UIColor blueColor];
+        _button.backgroundColor = [UIColor colorWithRed:233.0f/255.0f green:77.0f/255.0f blue:58.0f/255.0f alpha:1.0];
+        _button.layer.cornerRadius = 2.0;
         [_button setTitle:@"Hit Me" forState:UIControlStateNormal];
     }
     return _button;
