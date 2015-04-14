@@ -111,7 +111,7 @@ In this example we subscribe a view controller to notifications for any first re
                      animations:^{
         self.collectionView.contentOffset = CGPointMake(collectionView.contentOffset.x, offset);
 
-				self.collectionView.contentInset = UIEdgeInsetsMake(0, 0, event.keyboardFrame.size.height, 0);
+				self.collectionView.contentInset = UIEdgeInsetsMake(0, 0, keyboardEvent.keyboardFrame.size.height, 0);
         self.collectionView.scrollIndicatorInsets = self.collectionView.contentInset;
     } completion:nil];
 }
