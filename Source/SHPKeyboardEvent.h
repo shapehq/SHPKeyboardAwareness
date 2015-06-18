@@ -13,8 +13,6 @@ typedef NS_ENUM(NSUInteger, SHPKeyboardEventType) {
     SHPKeyboardEventTypeHide,
 };
 
-#import <Foundation/Foundation.h>
-
 @interface SHPKeyboardEvent : NSObject
 
 /// The view that conflicts with the keyboard
