@@ -5,9 +5,9 @@
 // Copyright (c) 2014-2015 SHAPE A/S. All rights reserved.
 //
 
+#import <ReactiveCocoa/ReactiveCocoa.h>
 #import "SHPKeyboardEvent.h"
 #import "NSObject+SHPKeyboardAwareness.h"
-#import "ReactiveCocoa.h"
 #import "SHPKeyboardAwarenessClient.h"
 
 static const CGAffineTransform kNormalRotation     = (CGAffineTransform){1,  0, -0,  1, 0, 0};
