@@ -6,3 +6,6 @@ Example/SHPKeyboardAwareness.xcodeproj/project.xcworkspace/xcuserdata
 Example/SHPKeyboardAwareness.xcodeproj/xcuserdata
 Example/SHPKeyboardAwareness.xcworkspace
 Example/.idea
+
+Carthage/
+build/
