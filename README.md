@@ -147,7 +147,7 @@ In this example we subscribe to notifications for when a specific view is obstru
     [super viewDidLoad];
     
     // Subscribe to keyboard events. The receiver (self) will be automatically unsubscribed when deallocated
-    [self engageKeyboardAwarenessForView:_myView];
+    [self shp_engageKeyboardAwarenessForView:_myView];
 }
 
 - (void)keyboardTriggeredEvent:(SHPKeyboardEvent *)event {
