@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>3275126F-85EF-4690-9DB5-073AF89D17CE</string>
+	<key>IDESourceControlProjectName</key>
+	<string>SHPKeyboardAwareness</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>54A4AFEE981140CF5303E23BD7960AD35D924211</key>
+		<string>github.com:shapehq/SHPKeyboardAwareness.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>SHPKeyboardAwareness.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>54A4AFEE981140CF5303E23BD7960AD35D924211</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>github.com:shapehq/SHPKeyboardAwareness.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>54A4AFEE981140CF5303E23BD7960AD35D924211</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>54A4AFEE981140CF5303E23BD7960AD35D924211</string>
+			<key>IDESourceControlWCCName</key>
+			<string>SHPKeyboardAwareness</string>
+		</dict>
+	</array>
+</dict>
+</plist>
