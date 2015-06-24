@@ -1,3 +1,8 @@
+v2.1.1
+======
+
+#### - Fixed issue with path to framework search path in project file, causing issues for Carthage users.
+
 v2.1.0
 ======
 
