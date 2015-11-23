@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "54A4AFEE981140CF5303E23BD7960AD35D924211",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "54A4AFEE981140CF5303E23BD7960AD35D924211" : 0,
+    "6EDAAFE429AFF2062BBCE90AF88E69999B918E39" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "EA86A5F0-DF1F-4965-8FE8-83F24443D871",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "54A4AFEE981140CF5303E23BD7960AD35D924211" : "SHPKeyboardAwareness\/",
+    "6EDAAFE429AFF2062BBCE90AF88E69999B918E39" : "..\/.."
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "SHPKeyboardAwareness",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "SHPKeyboardAwareness.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:shapehq\/SHPKeyboardAwareness.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "54A4AFEE981140CF5303E23BD7960AD35D924211"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "bitbucket.org:shapedk\/aarstiderne-madplaner.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "6EDAAFE429AFF2062BBCE90AF88E69999B918E39"
+    }
+  ]
+}
