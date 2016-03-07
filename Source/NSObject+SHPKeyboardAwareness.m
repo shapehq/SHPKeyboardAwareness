@@ -86,7 +86,26 @@ CGRect shp_normalizedFrame(CGRect frame, UIWindow *window) {
             Class ignoredClass2 = NSClassFromString(@"_SHPKeyboardTextView"); // So does SHPKeyboard
             return ![view isKindOfClass:ignoredClass1] && ![view isKindOfClass:ignoredClass2];
         }];
-        combinedShowSignal = [RACSignal zip:@[viewSignal,keyboardSignal]];
+        combinedShowSignal = [[[RACSignal combineLatest:@[viewSignal, keyboardSignal]] combinePreviousWithStart:nil reduce:^id(RACTuple *previousTuple, RACTuple *currentTuple) {
+            RACTupleUnpack(UIView *currentView, NSDictionary *currentKeyboardInfo) = currentTuple;
+            RACTupleUnpack(UIView *previousView, NSDictionary *previousKeyboardInfo) = previousTuple;
+
+            // If keyboard height changes (e.g. if keyboard locale is changed) trigger keyboard event
+            CGRect currentEndKeyboardBounds = ((NSValue *) currentKeyboardInfo[UIKeyboardFrameEndUserInfoKey]).CGRectValue;
+            CGRect previousEndKeyboardBounds = ((NSValue *) previousKeyboardInfo[UIKeyboardFrameEndUserInfoKey]).CGRectValue;
+            BOOL keyboardHeightDidChange = CGRectGetHeight(currentEndKeyboardBounds) != CGRectGetHeight(previousEndKeyboardBounds);
+
+            // If keyboard's y origin is higher than the previous tuple (e.g. the keyboard will show) trigger keyboard event
+            CGRect currentBeginKeyboardBounds = ((NSValue *) currentKeyboardInfo[UIKeyboardFrameBeginUserInfoKey]).CGRectValue;
+            CGRect previousBeginKeyboardBounds = ((NSValue *) previousKeyboardInfo[UIKeyboardFrameBeginUserInfoKey]).CGRectValue;
+            BOOL keyboardOriginDidChange = CGRectGetMinY(currentBeginKeyboardBounds) > CGRectGetMinY(previousBeginKeyboardBounds);
+
+            // If user changes first responder to a new view, trigger keyboard event
+            BOOL viewDidChange = currentView != previousView;
+
+            // Filter results by sending nil if nothing is changed
+            return keyboardHeightDidChange || viewDidChange || keyboardOriginDidChange ? currentTuple : nil;
+        }] ignore:nil];
     }
 
     __block SHPKeyboardEvent *event = nil;
