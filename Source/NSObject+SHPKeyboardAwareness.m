@@ -76,36 +76,29 @@ CGRect shp_normalizedFrame(CGRect frame, UIWindow *window) {
         combinedShowSignal = [RACSignal combineLatest:@[viewSignal,keyboardSignal]];
     }
     else {
-        RACSignal *viewNotifications = [RACSignal merge:@[[self shpka_rac_notifyUntilDealloc:UITextFieldTextDidBeginEditingNotification],
-                                                          [self shpka_rac_notifyUntilDealloc:UITextViewTextDidBeginEditingNotification]]];
+        RACSignal *viewNotifications = [RACSignal merge:@[
+            [self shpka_rac_notifyUntilDealloc:UITextFieldTextDidBeginEditingNotification],
+            [self shpka_rac_notifyUntilDealloc:UITextViewTextDidBeginEditingNotification],
+            // Enable trigger when keyboard changes input mode, since that may change its size
+            [self shpka_rac_notifyUntilDealloc:UITextInputCurrentInputModeDidChangeNotification]
+        ]];
 
+        // UITextInputCurrentInputModeDidChangeNotification's notification does
+        // not return the view which is first responder, so we save the latest
+        // view from one of the DidBeginEditing notifications and use that.
+        __block UIView *latestView;
         viewSignal = [[viewNotifications map:^id(NSNotification *notification) {
-            return notification.object;
+            if ([notification.object isKindOfClass:[UIView class]]) {
+                latestView = notification.object;
+            }
+            return latestView;
         }] filter:^BOOL(UIView *view) {
             Class ignoredClass1 = NSClassFromString(@"DCTextView"); // DCIntrospect messes with the first responder
             Class ignoredClass2 = NSClassFromString(@"_SHPKeyboardTextView"); // So does SHPKeyboard
             return ![view isKindOfClass:ignoredClass1] && ![view isKindOfClass:ignoredClass2];
         }];
-        combinedShowSignal = [[[RACSignal combineLatest:@[viewSignal, keyboardSignal]] combinePreviousWithStart:nil reduce:^id(RACTuple *previousTuple, RACTuple *currentTuple) {
-            RACTupleUnpack(UIView *currentView, NSDictionary *currentKeyboardInfo) = currentTuple;
-            RACTupleUnpack(UIView *previousView, NSDictionary *previousKeyboardInfo) = previousTuple;
 
-            // If keyboard height changes (e.g. if keyboard locale is changed) trigger keyboard event
-            CGRect currentEndKeyboardBounds = ((NSValue *) currentKeyboardInfo[UIKeyboardFrameEndUserInfoKey]).CGRectValue;
-            CGRect previousEndKeyboardBounds = ((NSValue *) previousKeyboardInfo[UIKeyboardFrameEndUserInfoKey]).CGRectValue;
-            BOOL keyboardHeightDidChange = CGRectGetHeight(currentEndKeyboardBounds) != CGRectGetHeight(previousEndKeyboardBounds);
-
-            // If keyboard's y origin is higher than the previous tuple (e.g. the keyboard will show) trigger keyboard event
-            CGRect currentBeginKeyboardBounds = ((NSValue *) currentKeyboardInfo[UIKeyboardFrameBeginUserInfoKey]).CGRectValue;
-            CGRect previousBeginKeyboardBounds = ((NSValue *) previousKeyboardInfo[UIKeyboardFrameBeginUserInfoKey]).CGRectValue;
-            BOOL keyboardOriginDidChange = CGRectGetMinY(currentBeginKeyboardBounds) > CGRectGetMinY(previousBeginKeyboardBounds);
-
-            // If user changes first responder to a new view, trigger keyboard event
-            BOOL viewDidChange = currentView != previousView;
-
-            // Filter results by sending nil if nothing is changed
-            return keyboardHeightDidChange || viewDidChange || keyboardOriginDidChange ? currentTuple : nil;
-        }] ignore:nil];
+        combinedShowSignal = [RACSignal zip:@[viewSignal,keyboardSignal]];
     }
 
     __block SHPKeyboardEvent *event = nil;
