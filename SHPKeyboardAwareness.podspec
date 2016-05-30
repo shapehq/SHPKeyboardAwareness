@@ -10,12 +10,12 @@ Pod::Spec.new do |s|
   s.author           = { "Mikkel Selsøe" => "mikkel@shape.dk" }
   s.source           = { :git => "https://github.com/shapehq/SHPKeyboardAwareness.git", :tag => s.version.to_s }
 
-  s.platform     = :ios, '7.0'
+  s.platform     = :ios, '8.0'
   s.requires_arc = true
 
   s.source_files = 'Source/**/*.{h,m}'
 
   s.public_header_files = 'Source/SHPKeyboardAwareness.h', 'Source/NSObject+SHPKeyboardAwareness.h', 'Source/SHPKeyboardEvent.h', 'Source/SHPKeyboardAwarenessClient.h'
   s.frameworks = 'UIKit'
-  s.dependency 'ReactiveCocoa', '~> 2.5.0'
+  s.dependency 'ReactiveCocoa', '~> 4.0.0'
 end
