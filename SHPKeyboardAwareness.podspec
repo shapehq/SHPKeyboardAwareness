@@ -17,5 +17,5 @@ Pod::Spec.new do |s|
 
   s.public_header_files = 'Source/SHPKeyboardAwareness.h', 'Source/NSObject+SHPKeyboardAwareness.h', 'Source/SHPKeyboardEvent.h', 'Source/SHPKeyboardAwarenessClient.h'
   s.frameworks = 'UIKit'
-  s.dependency 'ReactiveCocoa', '~> 2.5.0'
+  s.dependency 'ReactiveCocoa', '~> 4.0.0'
 end
