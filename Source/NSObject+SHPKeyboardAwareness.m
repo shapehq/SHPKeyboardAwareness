@@ -76,16 +76,28 @@ CGRect shp_normalizedFrame(CGRect frame, UIWindow *window) {
         combinedShowSignal = [RACSignal combineLatest:@[viewSignal,keyboardSignal]];
     }
     else {
-        RACSignal *viewNotifications = [RACSignal merge:@[[self shpka_rac_notifyUntilDealloc:UITextFieldTextDidBeginEditingNotification],
-                                                          [self shpka_rac_notifyUntilDealloc:UITextViewTextDidBeginEditingNotification]]];
+        RACSignal *viewNotifications = [RACSignal merge:@[
+            [self shpka_rac_notifyUntilDealloc:UITextFieldTextDidBeginEditingNotification],
+            [self shpka_rac_notifyUntilDealloc:UITextViewTextDidBeginEditingNotification],
+            // Enable trigger when keyboard changes input mode, since that may change its size
+            [self shpka_rac_notifyUntilDealloc:UITextInputCurrentInputModeDidChangeNotification]
+        ]];
 
+        // UITextInputCurrentInputModeDidChangeNotification's notification does
+        // not return the view which is first responder, so we save the latest
+        // view from one of the DidBeginEditing notifications and use that.
+        __block UIView *latestView;
         viewSignal = [[viewNotifications map:^id(NSNotification *notification) {
-            return notification.object;
+            if ([notification.object isKindOfClass:[UIView class]]) {
+                latestView = notification.object;
+            }
+            return latestView;
         }] filter:^BOOL(UIView *view) {
             Class ignoredClass1 = NSClassFromString(@"DCTextView"); // DCIntrospect messes with the first responder
             Class ignoredClass2 = NSClassFromString(@"_SHPKeyboardTextView"); // So does SHPKeyboard
             return ![view isKindOfClass:ignoredClass1] && ![view isKindOfClass:ignoredClass2];
         }];
+
         combinedShowSignal = [RACSignal zip:@[viewSignal,keyboardSignal]];
     }
 

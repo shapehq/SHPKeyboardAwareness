@@ -11,3 +11,4 @@ Example/.idea
 
 Carthage/
 build/
+*.orig
