@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6D3760411C03168A0003430B /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D3760401C03168A0003430B /* ReactiveCocoa.framework */; };
+		6D3760431C0316960003430B /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D3760421C0316960003430B /* Result.framework */; };
 		A68A62CB1B32E2D1007EEF57 /* NSObject+SHPKeyboardAwareness.h in Headers */ = {isa = PBXBuildFile; fileRef = A68A62C51B32E2D1007EEF57 /* NSObject+SHPKeyboardAwareness.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A68A62CC1B32E2D1007EEF57 /* NSObject+SHPKeyboardAwareness.m in Sources */ = {isa = PBXBuildFile; fileRef = A68A62C61B32E2D1007EEF57 /* NSObject+SHPKeyboardAwareness.m */; };
 		A68A62CD1B32E2D1007EEF57 /* SHPKeyboardAwareness.h in Headers */ = {isa = PBXBuildFile; fileRef = A68A62C71B32E2D1007EEF57 /* SHPKeyboardAwareness.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -14,10 +16,11 @@
 		A68A62CF1B32E2D1007EEF57 /* SHPKeyboardEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = A68A62C91B32E2D1007EEF57 /* SHPKeyboardEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A68A62D01B32E2D1007EEF57 /* SHPKeyboardEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = A68A62CA1B32E2D1007EEF57 /* SHPKeyboardEvent.m */; };
 		A68A62D21B32E316007EEF57 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A68A62D11B32E316007EEF57 /* UIKit.framework */; };
-		A68A62D41B32E393007EEF57 /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A68A62D31B32E393007EEF57 /* ReactiveCocoa.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6D3760401C03168A0003430B /* ReactiveCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveCocoa.framework; path = Carthage/Build/iOS/ReactiveCocoa.framework; sourceTree = "<group>"; };
+		6D3760421C0316960003430B /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
 		A68A62A91B32E28F007EEF57 /* SHPKeyboardAwareness.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SHPKeyboardAwareness.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A68A62AD1B32E28F007EEF57 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A68A62C51B32E2D1007EEF57 /* NSObject+SHPKeyboardAwareness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSObject+SHPKeyboardAwareness.h"; path = "../Source/NSObject+SHPKeyboardAwareness.h"; sourceTree = "<group>"; };
@@ -27,7 +30,6 @@
 		A68A62C91B32E2D1007EEF57 /* SHPKeyboardEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SHPKeyboardEvent.h; path = ../Source/SHPKeyboardEvent.h; sourceTree = "<group>"; };
 		A68A62CA1B32E2D1007EEF57 /* SHPKeyboardEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SHPKeyboardEvent.m; path = ../Source/SHPKeyboardEvent.m; sourceTree = "<group>"; };
 		A68A62D11B32E316007EEF57 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		A68A62D31B32E393007EEF57 /* ReactiveCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveCocoa.framework; path = Carthage/Build/iOS/ReactiveCocoa.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,7 +37,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A68A62D41B32E393007EEF57 /* ReactiveCocoa.framework in Frameworks */,
+				6D3760431C0316960003430B /* Result.framework in Frameworks */,
+				6D3760411C03168A0003430B /* ReactiveCocoa.framework in Frameworks */,
 				A68A62D21B32E316007EEF57 /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -46,7 +49,8 @@
 		A68A629F1B32E28F007EEF57 = {
 			isa = PBXGroup;
 			children = (
-				A68A62D31B32E393007EEF57 /* ReactiveCocoa.framework */,
+				6D3760421C0316960003430B /* Result.framework */,
+				6D3760401C03168A0003430B /* ReactiveCocoa.framework */,
 				A68A62D11B32E316007EEF57 /* UIKit.framework */,
 				A68A62AB1B32E28F007EEF57 /* SHPKeyboardAwareness */,
 				A68A62AA1B32E28F007EEF57 /* Products */,
@@ -108,6 +112,7 @@
 				A68A62A51B32E28F007EEF57 /* Frameworks */,
 				A68A62A61B32E28F007EEF57 /* Headers */,
 				A68A62A71B32E28F007EEF57 /* Resources */,
+				6D3760441C0316D00003430B /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -158,6 +163,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6D3760441C0316D00003430B /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/ReactiveCocoa.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Result.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = "/usr/local/bin/carthage copy-frameworks";
+			shellScript = "";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A68A62A41B32E28F007EEF57 /* Sources */ = {
