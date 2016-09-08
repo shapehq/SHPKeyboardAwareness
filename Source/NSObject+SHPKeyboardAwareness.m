@@ -21,7 +21,7 @@ static const CGAffineTransform kUpsideDownRotation = (CGAffineTransform){-1, 0, 
 @property (nonatomic, assign) CGFloat requiredViewOffset;
 @property (nonatomic, assign) CGRect visibleScreenArea;
 @property (nonatomic, assign) CGRect keyboardFrame;
-@property (nonatomic, assign) CGFloat keyboardAnimationDuration;
+@property (nonatomic, assign) NSTimeInterval keyboardAnimationDuration;
 @property (nonatomic, assign) UIViewAnimationCurve keyboardAnimationCurve;
 @property (nonatomic, assign) SHPKeyboardEventType keyboardEventType;
 
@@ -135,7 +135,7 @@ CGRect shp_normalizedFrame(CGRect frame, UIWindow *window) {
         event.conflictingView = view;
         event.visibleScreenArea = visibleRect;
         event.keyboardFrame = normKeyboardRect;
-        event.keyboardAnimationDuration = [keyboardInfo[UIKeyboardAnimationDurationUserInfoKey] floatValue];
+        event.keyboardAnimationDuration = [keyboardInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
         event.keyboardAnimationCurve = [keyboardInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue];
         event.keyboardEventType = SHPKeyboardEventTypeShow;
 
@@ -153,7 +153,7 @@ CGRect shp_normalizedFrame(CGRect frame, UIWindow *window) {
         event.conflictingView = nil;
         event.visibleScreenArea = normWindowRect;
         event.keyboardFrame = CGRectZero;
-        event.keyboardAnimationDuration = [keyboardInfo[UIKeyboardAnimationDurationUserInfoKey] floatValue];
+        event.keyboardAnimationDuration = [keyboardInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
         event.keyboardAnimationCurve = [keyboardInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue];
         event.keyboardEventType = SHPKeyboardEventTypeHide;
 

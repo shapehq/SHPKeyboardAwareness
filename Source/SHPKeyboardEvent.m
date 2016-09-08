@@ -25,7 +25,7 @@
     _keyboardFrame = keyboardFrame;
 }
 
-- (void)setKeyboardAnimationDuration:(CGFloat)keyboardAnimationDuration {
+- (void)setKeyboardAnimationDuration:(NSTimeInterval)keyboardAnimationDuration {
     _keyboardAnimationDuration = keyboardAnimationDuration;
 }
 
