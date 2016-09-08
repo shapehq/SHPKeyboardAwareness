@@ -28,7 +28,7 @@ typedef NS_ENUM(NSUInteger, SHPKeyboardEventType) {
 @property (nonatomic, readonly) CGRect keyboardFrame;
 
 /// The duration of the keyboard animation
-@property (nonatomic, readonly) CGFloat keyboardAnimationDuration;
+@property (nonatomic, readonly) NSTimeInterval keyboardAnimationDuration;
 
 /// The curve of the keyboard animation
 @property (nonatomic, readonly) UIViewAnimationCurve keyboardAnimationCurve;
