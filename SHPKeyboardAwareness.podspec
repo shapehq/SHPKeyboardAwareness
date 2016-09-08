@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   s.author           = { "Philip Bruce" => "philip@shape.dk" }
   s.source           = { :git => "https://github.com/shapehq/SHPKeyboardAwareness.git", :tag => s.version.to_s }
 
-  s.platform     = :ios, '7.0'
+  s.platform     = :ios, '8.0'
   s.requires_arc = true
 
   s.source_files = 'Source/**/*.{h,m}'
