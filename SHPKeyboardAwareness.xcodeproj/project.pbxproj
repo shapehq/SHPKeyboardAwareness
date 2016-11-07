@@ -112,7 +112,6 @@
 				A68A62A51B32E28F007EEF57 /* Frameworks */,
 				A68A62A61B32E28F007EEF57 /* Headers */,
 				A68A62A71B32E28F007EEF57 /* Resources */,
-				6D3760441C0316D00003430B /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -163,24 +162,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		6D3760441C0316D00003430B /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/ReactiveCocoa.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Result.framework",
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A68A62A41B32E28F007EEF57 /* Sources */ = {
