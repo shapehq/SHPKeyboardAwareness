@@ -63,13 +63,29 @@ CGRect shp_normalizedFrame(CGRect frame, UIWindow *window) {
 @implementation SHPKeyboardAwarenessObserver
 
 #pragma mark - setup
+- (instancetype)init {
+    if( !(self = [self initWithObserveView:nil delegate:nil])){ return nil;}
+    return self;
+}
+
 - (instancetype)initWithObserveView:(UIView *_Nullable)view {
+    if( !(self = [self initWithObserveView:view delegate:nil])){ return nil;}
+    return self;
+}
+
+- (instancetype)initWithDelegate:(id <SHPKeyboardAwarenessClient> _Nullable)delegate {
+    if( !(self = [self initWithObserveView:nil delegate:delegate])){ return nil;}
+    return self;
+}
+
+- (instancetype)initWithObserveView:(UIView *_Nullable)view delegate:(id <SHPKeyboardAwarenessClient> _Nullable)delegate {
     if( !(self = [super init])) { return nil; }
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
 
     // If there's no preset view, we need to grab it from the notifications in order to calculate the required offset
     self.conflictingViewIsPreset = view != nil;
     self.conflictView = view;
+    self.delegate = delegate;
     if( view == nil ) {
         [notificationCenter addObserver:self selector:@selector(viewNotification:) name:UITextFieldTextDidBeginEditingNotification object:nil];
         [notificationCenter addObserver:self selector:@selector(viewNotification:) name:UITextViewTextDidBeginEditingNotification object:nil];
@@ -78,22 +94,25 @@ CGRect shp_normalizedFrame(CGRect frame, UIWindow *window) {
 
     [notificationCenter addObserver:self selector:@selector(keyboardNotification:) name:UIKeyboardWillShowNotification object:nil];
     [notificationCenter addObserver:self selector:@selector(keyboardNotification:) name:UIKeyboardWillHideNotification object:nil];
-
     return self;
 }
 
-- (instancetype)init {
-    if( !(self = [self initWithObserveView:nil])){ return nil;}
-    return self;
++ (instancetype)Observe {
+    return [[SHPKeyboardAwarenessObserver alloc] initWithObserveView:nil delegate:nil];
 }
 
-+ (instancetype)Observer {
-    return [[SHPKeyboardAwarenessObserver alloc] initWithObserveView:nil];
++ (instancetype)ObserveWithDelegate:(id <SHPKeyboardAwarenessClient> _Nullable)delegate {
+    return [[SHPKeyboardAwarenessObserver alloc] initWithObserveView:nil delegate:delegate];
 }
 
-+ (instancetype)ObserverForView:(UIView *_Nullable)view {
-    return [[SHPKeyboardAwarenessObserver alloc] initWithObserveView:view];
++ (instancetype)ObserveView:(UIView *_Nullable)view {
+    return [[SHPKeyboardAwarenessObserver alloc] initWithObserveView:view delegate:nil];
 }
+
++ (instancetype)ObserveView:(UIView *_Nullable)view withDelegate:(id <SHPKeyboardAwarenessClient> _Nullable)delegate {
+    return [[SHPKeyboardAwarenessObserver alloc] initWithObserveView:view delegate:delegate];
+}
+
 
 #pragma mark - Teardown
 - (void)dealloc {
@@ -171,7 +190,7 @@ CGRect shp_normalizedFrame(CGRect frame, UIWindow *window) {
     self.event.keyboardAnimationCurve = option;
     self.event.keyboardEventType = SHPKeyboardEventTypeShow;
 
-    if(self.delegate) {
+    if(self.delegate != nil && self.event != nil) {
         [self.delegate keyboardTriggeredEvent:self.event];
     }
 }
@@ -188,7 +207,7 @@ CGRect shp_normalizedFrame(CGRect frame, UIWindow *window) {
     self.event.keyboardAnimationCurve = option;
     self.event.keyboardEventType = SHPKeyboardEventTypeHide;
 
-    if(self.delegate) {
+    if(self.delegate != nil && self.event != nil) {
         [self.delegate keyboardTriggeredEvent:self.event];
     }
 

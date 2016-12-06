@@ -11,6 +11,6 @@
 
 @protocol SHPKeyboardAwarenessClient <NSObject>
 
-- (void)keyboardTriggeredEvent:(nullable SHPKeyboardEvent *)keyboardEvent;
+- (void)keyboardTriggeredEvent:(nonnull SHPKeyboardEvent *)keyboardEvent;
 
 @end
