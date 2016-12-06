@@ -73,7 +73,7 @@ In this example we subscribe a view controller to notifications for any first re
     [super viewDidLoad];
     
     // Subscribe to keyboard events. The receiver (self) will be automatically unsubscribed when deallocated
-    self.keyboardAwareness = [SHPKeyboardAwarenessObserver ObserveWithDeledgate:self];
+    self.keyboardAwareness = [SHPKeyboardAwarenessObserver ObserveWithDelegate:self];
 }
 
 - (void)keyboardTriggeredEvent:(SHPKeyboardEvent *)keyboardEvent {
@@ -145,7 +145,7 @@ In this example we subscribe to notifications for when a specific view is obstru
     [super viewDidLoad];
     
     // Subscribe to keyboard events. The receiver (self) will be automatically unsubscribed when deallocated
-    self.keyboardAwareness = [SHPKeyboardAwarenessObserver ObserveView: _myView withDeledgate:self];
+    self.keyboardAwareness = [SHPKeyboardAwarenessObserver ObserveView: _myView withDelegate:self];
 }
 
 - (void)keyboardTriggeredEvent:(SHPKeyboardEvent *)event {
