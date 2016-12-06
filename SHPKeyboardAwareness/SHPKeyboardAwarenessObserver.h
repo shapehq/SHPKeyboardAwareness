@@ -1,34 +1,33 @@
 //
 // SHPKeyboardAwareness
-// NSObject+SHPKeyboardAwareness.h
+// SHPKeyboardAwareness.h
 //
-// Copyright (c) 2014-2015 SHAPE A/S. All rights reserved.
+// Copyright (c) 2014-2016 SHAPE A/S. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import <ReactiveCocoa/ReactiveCocoa.h>
 #import <UIKit/UIKit.h>
 
-@class RACSignal;
+@protocol SHPKeyboardAwarenessClient;
 
-@interface NSObject (SHPKeyboardAwareness)
+@interface SHPKeyboardAwarenessObserver : NSObject
+@property (nonatomic, weak, nullable) id<SHPKeyboardAwarenessClient> delegate;
 
-/// returns a signal that provides a signal containing the offset needed for clearing the active textField or textView from the keyboard
-- (RACSignal *)shp_keyboardAwarenessSignal;
-
-/// returns a signal that provides a signal containing the offset needed for clearing a view from the keyboard
-/// @param view The view you want to stay clear of the keyboard.
-- (RACSignal *)shp_keyboardAwarenessSignalForView:(UIView *)view;
+- (instancetype _Nonnull)initWithObserveView: (UIView *_Nullable)view;
+- (instancetype _Nonnull)init;
 
 /// The receiver will get keyboard events during its life time. The receiver must implement the keyboardTriggeredEvent: method as defined
 /// in the SHPKeyboardAwarenessClient protocol. Does not currently support events for rotation while the keyboard is visible. If required, use
-/// shp_engageKeyboardAwarenessForView: instead.
-- (void)shp_engageKeyboardAwareness;
-
+/// ObserverForView: instead.
++ (instancetype _Nonnull)Observer;
 /// The receiver will get keyboard events during its life time. The receiver must implement the keyboardTriggeredEvent: method as defined
 /// in the SHPKeyboardAwarenessClient protocol. Optionally, provide a view which you want to limit the events to. Keyboard events will be
 /// sent, only when view conflicts with the keyboard bounds.
 /// @param view The view you want to stay clear of the keyboard. Provide nil to get same functionality as shp_engageKeyboardAwareness
-- (void)shp_engageKeyboardAwarenessForView:(UIView *)view;
++ (instancetype _Nonnull)ObserverForView: (UIView *_Nullable)view;
+
+//- (void)shp_engageKeyboardAwareness;
+//
+//- (void)shp_engageKeyboardAwarenessForView:(UIView *)view;
 
 @end

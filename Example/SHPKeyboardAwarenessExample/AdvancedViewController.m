@@ -2,14 +2,15 @@
 // SHPKeyboardAwareness
 // AdvancedViewController.m
 //
-// Copyright (c) 2014-2015 SHAPE A/S. All rights reserved.
+// Copyright (c) 2014-2016 SHAPE A/S. All rights reserved.
 //
 
+@import SHPKeyboardAwareness;
+
 #import "AdvancedViewController.h"
-#import "SHPKeyboardAwareness.h"
 #import "UITextField+Pretty.h"
 
-@interface AdvancedViewController () <UITextFieldDelegate>
+@interface AdvancedViewController () <UITextFieldDelegate, SHPKeyboardAwarenessClient>
 
 @property (nonatomic, strong) UIView *containerView;
 @property (nonatomic, strong) UITextField *textField;
@@ -17,6 +18,7 @@
 @property (nonatomic, strong) NSLayoutConstraint *bottomConstraint;
 
 
+@property(nonatomic, strong) SHPKeyboardAwarenessObserver *keyboardAwareness;
 @end
 
 @implementation AdvancedViewController
@@ -28,7 +30,8 @@
     [self setupSubviews];
     
     // Subscribe to keyboard events. The receiver (self in this case) will be automatically unsubscribed when deallocated
-    [self shp_engageKeyboardAwarenessForView:self.containerView];
+    self.keyboardAwareness = [SHPKeyboardAwarenessObserver ObserverForView:self.containerView];
+    self.keyboardAwareness.delegate = self;
 }
 
 - (void)setupSubviews {

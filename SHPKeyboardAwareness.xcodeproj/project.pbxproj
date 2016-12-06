@@ -7,10 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6D3760411C03168A0003430B /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D3760401C03168A0003430B /* ReactiveCocoa.framework */; };
-		6D3760431C0316960003430B /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D3760421C0316960003430B /* Result.framework */; };
-		A68A62CB1B32E2D1007EEF57 /* NSObject+SHPKeyboardAwareness.h in Headers */ = {isa = PBXBuildFile; fileRef = A68A62C51B32E2D1007EEF57 /* NSObject+SHPKeyboardAwareness.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A68A62CC1B32E2D1007EEF57 /* NSObject+SHPKeyboardAwareness.m in Sources */ = {isa = PBXBuildFile; fileRef = A68A62C61B32E2D1007EEF57 /* NSObject+SHPKeyboardAwareness.m */; };
+		3625990D1DF6AFD100DA706C /* SHPKeyboardAwarenessObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 3625990B1DF6AFD100DA706C /* SHPKeyboardAwarenessObserver.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3625990E1DF6AFD100DA706C /* SHPKeyboardAwarenessObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 3625990C1DF6AFD100DA706C /* SHPKeyboardAwarenessObserver.m */; };
 		A68A62CD1B32E2D1007EEF57 /* SHPKeyboardAwareness.h in Headers */ = {isa = PBXBuildFile; fileRef = A68A62C71B32E2D1007EEF57 /* SHPKeyboardAwareness.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A68A62CE1B32E2D1007EEF57 /* SHPKeyboardAwarenessClient.h in Headers */ = {isa = PBXBuildFile; fileRef = A68A62C81B32E2D1007EEF57 /* SHPKeyboardAwarenessClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A68A62CF1B32E2D1007EEF57 /* SHPKeyboardEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = A68A62C91B32E2D1007EEF57 /* SHPKeyboardEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -19,12 +17,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		6D3760401C03168A0003430B /* ReactiveCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveCocoa.framework; path = Carthage/Build/iOS/ReactiveCocoa.framework; sourceTree = "<group>"; };
-		6D3760421C0316960003430B /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
+		3625990B1DF6AFD100DA706C /* SHPKeyboardAwarenessObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHPKeyboardAwarenessObserver.h; sourceTree = "<group>"; };
+		3625990C1DF6AFD100DA706C /* SHPKeyboardAwarenessObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHPKeyboardAwarenessObserver.m; sourceTree = "<group>"; };
 		A68A62A91B32E28F007EEF57 /* SHPKeyboardAwareness.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SHPKeyboardAwareness.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A68A62AD1B32E28F007EEF57 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A68A62C51B32E2D1007EEF57 /* NSObject+SHPKeyboardAwareness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSObject+SHPKeyboardAwareness.h"; path = "../Source/NSObject+SHPKeyboardAwareness.h"; sourceTree = "<group>"; };
-		A68A62C61B32E2D1007EEF57 /* NSObject+SHPKeyboardAwareness.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSObject+SHPKeyboardAwareness.m"; path = "../Source/NSObject+SHPKeyboardAwareness.m"; sourceTree = "<group>"; };
 		A68A62C71B32E2D1007EEF57 /* SHPKeyboardAwareness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SHPKeyboardAwareness.h; path = ../Source/SHPKeyboardAwareness.h; sourceTree = "<group>"; };
 		A68A62C81B32E2D1007EEF57 /* SHPKeyboardAwarenessClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SHPKeyboardAwarenessClient.h; path = ../Source/SHPKeyboardAwarenessClient.h; sourceTree = "<group>"; };
 		A68A62C91B32E2D1007EEF57 /* SHPKeyboardEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SHPKeyboardEvent.h; path = ../Source/SHPKeyboardEvent.h; sourceTree = "<group>"; };
@@ -37,8 +33,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6D3760431C0316960003430B /* Result.framework in Frameworks */,
-				6D3760411C03168A0003430B /* ReactiveCocoa.framework in Frameworks */,
 				A68A62D21B32E316007EEF57 /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -49,8 +43,6 @@
 		A68A629F1B32E28F007EEF57 = {
 			isa = PBXGroup;
 			children = (
-				6D3760421C0316960003430B /* Result.framework */,
-				6D3760401C03168A0003430B /* ReactiveCocoa.framework */,
 				A68A62D11B32E316007EEF57 /* UIKit.framework */,
 				A68A62AB1B32E28F007EEF57 /* SHPKeyboardAwareness */,
 				A68A62AA1B32E28F007EEF57 /* Products */,
@@ -68,8 +60,8 @@
 		A68A62AB1B32E28F007EEF57 /* SHPKeyboardAwareness */ = {
 			isa = PBXGroup;
 			children = (
-				A68A62C51B32E2D1007EEF57 /* NSObject+SHPKeyboardAwareness.h */,
-				A68A62C61B32E2D1007EEF57 /* NSObject+SHPKeyboardAwareness.m */,
+				3625990B1DF6AFD100DA706C /* SHPKeyboardAwarenessObserver.h */,
+				3625990C1DF6AFD100DA706C /* SHPKeyboardAwarenessObserver.m */,
 				A68A62C71B32E2D1007EEF57 /* SHPKeyboardAwareness.h */,
 				A68A62C81B32E2D1007EEF57 /* SHPKeyboardAwarenessClient.h */,
 				A68A62C91B32E2D1007EEF57 /* SHPKeyboardEvent.h */,
@@ -94,8 +86,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A68A62CB1B32E2D1007EEF57 /* NSObject+SHPKeyboardAwareness.h in Headers */,
 				A68A62CE1B32E2D1007EEF57 /* SHPKeyboardAwarenessClient.h in Headers */,
+				3625990D1DF6AFD100DA706C /* SHPKeyboardAwarenessObserver.h in Headers */,
 				A68A62CF1B32E2D1007EEF57 /* SHPKeyboardEvent.h in Headers */,
 				A68A62CD1B32E2D1007EEF57 /* SHPKeyboardAwareness.h in Headers */,
 			);
@@ -168,7 +160,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A68A62CC1B32E2D1007EEF57 /* NSObject+SHPKeyboardAwareness.m in Sources */,
+				3625990E1DF6AFD100DA706C /* SHPKeyboardAwarenessObserver.m in Sources */,
 				A68A62D01B32E2D1007EEF57 /* SHPKeyboardEvent.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
