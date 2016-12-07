@@ -10,6 +10,8 @@
 
 typedef NS_ENUM(NSUInteger, SHPKeyboardEventType) {
     SHPKeyboardEventTypeShow,
+    SHPKeyboardEventTypeViewChanged,
+    SHPKeyboardEventTypeKeyboardFrameChanged,
     SHPKeyboardEventTypeHide,
 };
 

@@ -8,6 +8,7 @@
 #import "AppDelegate.h"
 #import "ViewController.h"
 #import "AdvancedViewController.h"
+#import "DualInputsViewController.h"
 
 @interface AppDelegate ()
 
@@ -21,12 +22,14 @@
     
     ViewController *viewController = [ViewController new];
     AdvancedViewController *advancedViewController = [AdvancedViewController new];
+    DualInputsViewController *dualInputViewController = [DualInputsViewController new];
     
     viewController.tabBarItem.title = @"Example 1";
     advancedViewController.tabBarItem.title = @"Example 2";
+    dualInputViewController.tabBarItem.title = @"Example 3";
     
     UITabBarController *tabBarController = [UITabBarController new];
-    [tabBarController setViewControllers:@[ viewController, advancedViewController ]];
+    [tabBarController setViewControllers:@[ viewController, advancedViewController, dualInputViewController ]];
     
     self.window.rootViewController = tabBarController;
     [self.window makeKeyAndVisible];

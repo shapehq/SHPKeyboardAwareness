@@ -30,7 +30,7 @@
     [self setupSubviews];
     
     // Subscribe to keyboard events. The receiver (self in this case) will be automatically unsubscribed when deallocated
-    self.keyboardAwareness = [SHPKeyboardAwarenessObserver ObserverForView:self.containerView];
+    self.keyboardAwareness = [SHPKeyboardAwarenessObserver ObserveView:self.containerView observerSuperView:self.view];
     self.keyboardAwareness.delegate = self;
 }
 
@@ -79,9 +79,12 @@
         // Add the required offset plus some padding to have space between keyboard and text field
         offset = self.bottomConstraint.constant + keyboardEvent.requiredViewOffset - 10;
     }
-    else {
+    else if(keyboardEvent.keyboardEventType == SHPKeyboardEventTypeHide) {
         // Re-apply the original text field offset
         offset = keyboardEvent.originalOffset;
+    }
+    else if(keyboardEvent.keyboardEventType == SHPKeyboardEventTypeViewChanged) {
+        offset = self.bottomConstraint.constant + keyboardEvent.requiredViewOffset - 10;
     }
     
     // Animate

@@ -8,6 +8,8 @@
 #import "SHPKeyboardEvent.h"
 #import "SHPKeyboardAwarenessObserver.h"
 #import "SHPKeyboardAwarenessClient.h"
+#import "SHPEventInfo.h"
+#import "SHPKeyboardInfo.h"
 
 static const CGAffineTransform kNormalRotation     = (CGAffineTransform){1,  0, -0,  1, 0, 0};
 static const CGAffineTransform kRightRotation      = (CGAffineTransform){0, -1,  1,  0, 0, 0};
@@ -55,45 +57,65 @@ CGRect shp_normalizedFrame(CGRect frame, UIWindow *window) {
 }
 
 @interface SHPKeyboardAwarenessObserver()
-@property(nonatomic) BOOL conflictingViewIsPreset;
-@property(nonatomic, strong) UIView *conflictView;
-@property(nonatomic, strong) SHPKeyboardEvent *event;
+@property (nonatomic, strong) SHPKeyboardEvent *event;
+@property (nonatomic, strong) SHPEventInfo *eventInfo;
+@property (nonatomic, strong) UIView *presetConflictingView;
 @end
 
 @implementation SHPKeyboardAwarenessObserver
 
 #pragma mark - setup
-- (instancetype)initWithObserveView:(UIView *_Nullable)view {
+- (instancetype)initWithObserverSuperView:(UIView *)superView {
+    if( !(self = [self initWithObserveView:nil delegate:nil observerSuperView:superView])){ return nil;}
+    return self;
+}
+
+- (instancetype)initWithObserveView:(UIView *_Nullable)view observerSuperView:(UIView *)superView {
+    if( !(self = [self initWithObserveView:view delegate:nil observerSuperView:superView])){ return nil;}
+    return self;
+}
+
+- (instancetype)initWithDelegate:(id <SHPKeyboardAwarenessClient> _Nullable)delegate observerSuperView:(UIView * _Nullable)superView {
+    if( !(self = [self initWithObserveView:nil delegate:delegate observerSuperView:superView])){ return nil;}
+    return self;
+}
+
+- (instancetype)initWithObserveView:(UIView *_Nullable)view delegate:(id <SHPKeyboardAwarenessClient> _Nullable)delegate observerSuperView:(UIView * _Nullable)superView {
     if( !(self = [super init])) { return nil; }
+    _eventInfo = [SHPEventInfo new];
+
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
 
-    // If there's no preset view, we need to grab it from the notifications in order to calculate the required offset
-    self.conflictingViewIsPreset = view != nil;
-    self.conflictView = view;
-    if( view == nil ) {
-        [notificationCenter addObserver:self selector:@selector(viewNotification:) name:UITextFieldTextDidBeginEditingNotification object:nil];
-        [notificationCenter addObserver:self selector:@selector(viewNotification:) name:UITextViewTextDidBeginEditingNotification object:nil];
-        [notificationCenter addObserver:self selector:@selector(viewNotification:) name:UITextInputCurrentInputModeDidChangeNotification object:nil];
-    }
+    self.delegate = delegate;
+    self.presetConflictingView = view;
+    self.observerSuperView = superView;
+    
+    [notificationCenter addObserver:self selector:@selector(viewNotification:) name:UITextFieldTextDidBeginEditingNotification object:nil];
+    [notificationCenter addObserver:self selector:@selector(viewNotification:) name:UITextViewTextDidBeginEditingNotification object:nil];
+    [notificationCenter addObserver:self selector:@selector(viewNotification:) name:UITextInputCurrentInputModeDidChangeNotification object:nil];
 
     [notificationCenter addObserver:self selector:@selector(keyboardNotification:) name:UIKeyboardWillShowNotification object:nil];
     [notificationCenter addObserver:self selector:@selector(keyboardNotification:) name:UIKeyboardWillHideNotification object:nil];
-
     return self;
 }
 
-- (instancetype)init {
-    if( !(self = [self initWithObserveView:nil])){ return nil;}
-    return self;
+#pragma mark - Convenience
++ (instancetype)ObserveWithObserverSuperView:(UIView *)superView {
+    return [[SHPKeyboardAwarenessObserver alloc] initWithObserveView:nil delegate:nil observerSuperView:superView];
 }
 
-+ (instancetype)Observer {
-    return [[SHPKeyboardAwarenessObserver alloc] initWithObserveView:nil];
++ (instancetype)ObserveWithDelegate:(id <SHPKeyboardAwarenessClient> _Nullable)delegate observerSuperView:(UIView * _Nullable)superView {
+    return [[SHPKeyboardAwarenessObserver alloc] initWithObserveView:nil delegate:delegate observerSuperView:superView];
 }
 
-+ (instancetype)ObserverForView:(UIView *_Nullable)view {
-    return [[SHPKeyboardAwarenessObserver alloc] initWithObserveView:view];
++ (instancetype)ObserveView:(UIView *_Nullable)view observerSuperView:(UIView * _Nullable)superView {
+    return [[SHPKeyboardAwarenessObserver alloc] initWithObserveView:view delegate:nil observerSuperView:superView];
 }
+
++ (instancetype)ObserveView:(UIView *_Nullable)view withDelegate:(id <SHPKeyboardAwarenessClient> _Nullable)delegate observerSuperView:(UIView * _Nullable)superView {
+    return [[SHPKeyboardAwarenessObserver alloc] initWithObserveView:view delegate:delegate observerSuperView:superView];
+}
+
 
 #pragma mark - Teardown
 - (void)dealloc {
@@ -106,7 +128,7 @@ CGRect shp_normalizedFrame(CGRect frame, UIWindow *window) {
     [notificationCenter removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
 
-#pragma mark - Event handling
+#pragma mark - Notifications handling
 - (void)viewNotification: (NSNotification *_Nonnull)notification {
 
     // Get the conflicting view
@@ -117,9 +139,42 @@ CGRect shp_normalizedFrame(CGRect frame, UIWindow *window) {
 
         UIView *view = (UIView *)notification.object;
         if(![view isKindOfClass:ignoredClass1] && ![view isKindOfClass:ignoredClass2]) {
-            self.conflictView = view;
+            
+            BOOL handleKeyboardEventsForView = NO;
+            if(self.presetConflictingView) {
+                if([self.presetConflictingView isEqual:view]){
+                    handleKeyboardEventsForView = YES;
+                }
+                else if( [self isView:view aSubviewOfView:self.presetConflictingView]) {
+                    handleKeyboardEventsForView = YES;
+                }
+            }
+            else if( self.observerSuperView ) {
+                if( [self isView:view aSubviewOfView:self.observerSuperView]) {
+                    handleKeyboardEventsForView = YES;
+                }
+            }
+            else {
+                handleKeyboardEventsForView = YES;
+            }
+            if( handleKeyboardEventsForView ) {
+                SHPEventInfo *eventInfoCopy = [self.eventInfo copy];
+                eventInfoCopy.conflictView = self.presetConflictingView?: view;
+                self.eventInfo = eventInfoCopy;
+            }
         }
     }
+}
+
+- (BOOL)isView: (UIView *)view aSubviewOfView: (UIView *)potentialParentView {
+    BOOL isSubview = NO;
+    if([view.superview isEqual:potentialParentView]) {
+        isSubview = YES;
+    }
+    else if( view.superview ) {
+        isSubview = [self isView:view.superview aSubviewOfView:potentialParentView];
+    }
+    return isSubview;
 }
 
 - (void)keyboardNotification: (NSNotification *_Nonnull)notification {
@@ -128,24 +183,80 @@ CGRect shp_normalizedFrame(CGRect frame, UIWindow *window) {
 
     CGRect keyboardFrame = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
     NSTimeInterval animationDuration = [notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    NSInteger animationCurve = [notification.userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue];
+    UIViewAnimationCurve animationCurve = (UIViewAnimationCurve)[notification.userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue];
 
 
     if( [notification.name isEqualToString:UIKeyboardWillShowNotification] ) {
-        [self showEventWithKeyboardFrame:keyboardFrame animationDuration:animationDuration animationOption:animationCurve conflictingView:self.conflictView];
+        SHPEventInfo *eventInfoCopy = [self.eventInfo copy];
+        eventInfoCopy.keyboardInfo = [SHPKeyboardInfo InfoWithEventType: SHPKeyboardEventTypeShow frame: keyboardFrame animationDuration: animationDuration animationOption: animationCurve];
+        self.eventInfo = eventInfoCopy;
     }
     else if( [notification.name isEqualToString:UIKeyboardWillHideNotification] ) {
-        [self hideEventWithKeyboardFrame:keyboardFrame animationDuration:animationDuration animationOption:animationCurve conflictingView:self.conflictView];
+        SHPEventInfo *eventInfoCopy = [self.eventInfo copy];
+        eventInfoCopy.keyboardInfo = [SHPKeyboardInfo InfoWithEventType: SHPKeyboardEventTypeHide frame: CGRectZero animationDuration: animationDuration animationOption: animationCurve];
+        self.eventInfo = eventInfoCopy;
     }
 }
 
-- (void)showEventWithKeyboardFrame: (CGRect)kbRect animationDuration: (NSTimeInterval)duration animationOption: (UIViewAnimationCurve)option conflictingView: (UIView *)view {
+#pragma mark - Event handling
+- (void)setEventInfo:(SHPEventInfo *)eventInfo {
+    SHPKeyboardEvent *keyboardEvent;
+    if( eventInfo.conflictView != nil && eventInfo.keyboardInfo != nil && _eventInfo.keyboardInfo != nil) {
+        // Change view/keyboard or hide keyboard
+        // this is at least a second time we are called
+
+        if( !CGRectEqualToRect(eventInfo.keyboardInfo.rect, _eventInfo.keyboardInfo.rect) || eventInfo.keyboardInfo.eventType != _eventInfo.keyboardInfo.eventType ) {
+            // keyboard is changing
+            if(eventInfo.keyboardInfo.eventType == SHPKeyboardEventTypeHide) {
+                keyboardEvent = [self hideEventWithExistingEvent:self.event keyboardInfo:eventInfo.keyboardInfo conflictingView:eventInfo.conflictView];
+            }
+            else {
+                keyboardEvent = [self showEventWithKeyboardInfo:eventInfo.keyboardInfo conflictingView:eventInfo.conflictView];
+                keyboardEvent.originalOffset = self.event.originalOffset;
+                keyboardEvent.keyboardEventType = SHPKeyboardEventTypeKeyboardFrameChanged;
+            }
+        }
+        else if( ![_eventInfo.conflictView isEqual:eventInfo.conflictView] ) {
+            // view is changing
+            keyboardEvent = [self showEventWithKeyboardInfo:eventInfo.keyboardInfo conflictingView:eventInfo.conflictView];
+            keyboardEvent.originalOffset = self.event.originalOffset;
+            keyboardEvent.keyboardEventType = SHPKeyboardEventTypeViewChanged;
+        }
+
+    }
+    else if( eventInfo.conflictView != nil && eventInfo.keyboardInfo != nil && eventInfo.keyboardInfo.eventType == SHPKeyboardEventTypeShow) {
+        // Show keyboard
+        keyboardEvent = [self showEventWithKeyboardInfo:eventInfo.keyboardInfo conflictingView:eventInfo.conflictView];
+    }
+    
+
+    if( keyboardEvent != nil ) {
+        if(self.delegate) {
+            [self.delegate keyboardTriggeredEvent:keyboardEvent];
+        }
+        self.event = keyboardEvent;
+    }
+
+    if( eventInfo != nil && eventInfo.keyboardInfo.eventType == SHPKeyboardEventTypeHide ) {
+        // clean up
+        _eventInfo.keyboardInfo = nil;
+        _eventInfo.conflictView = nil;
+
+        self.event = nil;
+    }
+    else {
+        _eventInfo = eventInfo;
+    }
+}
+
+
+
+- (SHPKeyboardEvent *)showEventWithKeyboardInfo: (SHPKeyboardInfo *)keyboardInfo conflictingView: (UIView *)view {
     // Window stuff
     UIWindow *window = view.window;
 
     // Keyboard stuff
-
-    CGRect normKeyboardRect = shp_normalizedFrame(kbRect, window);
+    CGRect normKeyboardRect = shp_normalizedFrame(keyboardInfo.rect, window);
     CGFloat keyboardTop = normKeyboardRect.origin.y;
 
     // View stuff
@@ -162,40 +273,32 @@ CGRect shp_normalizedFrame(CGRect frame, UIWindow *window) {
     visibleRect.size.height -= normKeyboardRect.size.height;
 
     // Encapsulation stuff
-    self.event = [SHPKeyboardEvent new];
-    self.event.requiredViewOffset = offset;
-    self.event.conflictingView = view;
-    self.event.visibleScreenArea = visibleRect;
-    self.event.keyboardFrame = normKeyboardRect;
-    self.event.keyboardAnimationDuration = duration;
-    self.event.keyboardAnimationCurve = option;
-    self.event.keyboardEventType = SHPKeyboardEventTypeShow;
+    SHPKeyboardEvent *event = [SHPKeyboardEvent new];
+    event.requiredViewOffset = offset;
+    event.conflictingView = view;
+    event.visibleScreenArea = visibleRect;
+    event.keyboardFrame = normKeyboardRect;
+    event.keyboardAnimationDuration = keyboardInfo.animationDuration;
+    event.keyboardAnimationCurve = keyboardInfo.animationOption;
+    event.keyboardEventType = SHPKeyboardEventTypeShow;
 
-    if(self.delegate) {
-        [self.delegate keyboardTriggeredEvent:self.event];
-    }
+    return event;
 }
 
-- (void)hideEventWithKeyboardFrame: (CGRect)_ animationDuration: (NSTimeInterval)duration animationOption: (UIViewAnimationCurve)option conflictingView: (UIView *)view {
+- (SHPKeyboardEvent *)hideEventWithExistingEvent:(SHPKeyboardEvent *)event keyboardInfo: (SHPKeyboardInfo *)keyboardInfo conflictingView: (UIView *)view {
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
     CGRect normWindowRect = shp_normalizedFrame(window.frame, window);
 
-    self.event.requiredViewOffset = 0;
-    self.event.conflictingView = nil;
-    self.event.visibleScreenArea = normWindowRect;
-    self.event.keyboardFrame = CGRectZero;
-    self.event.keyboardAnimationDuration = duration;
-    self.event.keyboardAnimationCurve = option;
-    self.event.keyboardEventType = SHPKeyboardEventTypeHide;
+    event.requiredViewOffset = 0;
+    event.conflictingView = nil;
+    event.visibleScreenArea = normWindowRect;
+    event.keyboardFrame = CGRectZero;
+    event.keyboardAnimationDuration = keyboardInfo.animationDuration;
+    event.keyboardAnimationCurve = keyboardInfo.animationOption;
+    event.keyboardEventType = SHPKeyboardEventTypeHide;
 
-    if(self.delegate) {
-        [self.delegate keyboardTriggeredEvent:self.event];
-    }
-
-    if(!self.conflictingViewIsPreset) {
-        self.conflictView = nil;
-    }
-    self.event = nil;
+    return event;
 }
+
 
 @end

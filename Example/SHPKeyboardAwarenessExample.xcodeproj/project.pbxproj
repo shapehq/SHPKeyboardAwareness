@@ -14,6 +14,7 @@
 		362598FE1DF6AB4D00DA706C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 362598FC1DF6AB4D00DA706C /* LaunchScreen.storyboard */; };
 		362599091DF6ABB400DA706C /* AdvancedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 362599061DF6ABB400DA706C /* AdvancedViewController.m */; };
 		3625990A1DF6ABB400DA706C /* UITextField+Pretty.m in Sources */ = {isa = PBXBuildFile; fileRef = 362599081DF6ABB400DA706C /* UITextField+Pretty.m */; };
+		362599151DF6C4BD00DA706C /* DualInputsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 362599141DF6C4BD00DA706C /* DualInputsViewController.m */; };
 		9EA1CAE6C72950FF87A69745 /* Pods_SHPKeyboardAwarenessExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F879B9C41B4FA37744B6C3DA /* Pods_SHPKeyboardAwarenessExample.framework */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +32,8 @@
 		362599061DF6ABB400DA706C /* AdvancedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvancedViewController.m; sourceTree = "<group>"; };
 		362599071DF6ABB400DA706C /* UITextField+Pretty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+Pretty.h"; sourceTree = "<group>"; };
 		362599081DF6ABB400DA706C /* UITextField+Pretty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+Pretty.m"; sourceTree = "<group>"; };
+		362599131DF6C4BD00DA706C /* DualInputsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DualInputsViewController.h; sourceTree = "<group>"; };
+		362599141DF6C4BD00DA706C /* DualInputsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DualInputsViewController.m; sourceTree = "<group>"; };
 		60A69B7F586E29F7F879DD01 /* Pods-SHPKeyboardAwarenessExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SHPKeyboardAwarenessExample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SHPKeyboardAwarenessExample/Pods-SHPKeyboardAwarenessExample.debug.xcconfig"; sourceTree = "<group>"; };
 		D58CD0101FD666FB28D42F57 /* Pods-SHPKeyboardAwarenessExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SHPKeyboardAwarenessExample.release.xcconfig"; path = "Pods/Target Support Files/Pods-SHPKeyboardAwarenessExample/Pods-SHPKeyboardAwarenessExample.release.xcconfig"; sourceTree = "<group>"; };
 		F879B9C41B4FA37744B6C3DA /* Pods_SHPKeyboardAwarenessExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SHPKeyboardAwarenessExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -81,6 +84,8 @@
 				362598FC1DF6AB4D00DA706C /* LaunchScreen.storyboard */,
 				362598FF1DF6AB4D00DA706C /* Info.plist */,
 				362598EE1DF6AB4D00DA706C /* Supporting Files */,
+				362599131DF6C4BD00DA706C /* DualInputsViewController.h */,
+				362599141DF6C4BD00DA706C /* DualInputsViewController.m */,
 			);
 			path = SHPKeyboardAwarenessExample;
 			sourceTree = "<group>";
@@ -234,6 +239,7 @@
 				362599091DF6ABB400DA706C /* AdvancedViewController.m in Sources */,
 				362598F61DF6AB4D00DA706C /* ViewController.m in Sources */,
 				3625990A1DF6ABB400DA706C /* UITextField+Pretty.m in Sources */,
+				362599151DF6C4BD00DA706C /* DualInputsViewController.m in Sources */,
 				362598F31DF6AB4D00DA706C /* AppDelegate.m in Sources */,
 				362598F01DF6AB4D00DA706C /* main.m in Sources */,
 			);

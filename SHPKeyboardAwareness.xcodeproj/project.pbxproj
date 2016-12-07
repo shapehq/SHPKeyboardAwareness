@@ -7,8 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3625990D1DF6AFD100DA706C /* SHPKeyboardAwarenessObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 3625990B1DF6AFD100DA706C /* SHPKeyboardAwarenessObserver.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3625990E1DF6AFD100DA706C /* SHPKeyboardAwarenessObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 3625990C1DF6AFD100DA706C /* SHPKeyboardAwarenessObserver.m */; };
+		362599111DF6BF7100DA706C /* SHPKeyboardAwarenessObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 3625990F1DF6BF7100DA706C /* SHPKeyboardAwarenessObserver.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		362599121DF6BF7100DA706C /* SHPKeyboardAwarenessObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 362599101DF6BF7100DA706C /* SHPKeyboardAwarenessObserver.m */; };
+		6037210D513DD95762851460 /* SHPEventInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 603720B4AAB7D60E176B4DBA /* SHPEventInfo.h */; };
+		60372178A0C5EB83A40459CA /* SHPKeyboardInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6037209823A4E23739CC5B64 /* SHPKeyboardInfo.m */; };
+		603724846C438D402ADFB16A /* SHPKeyboardInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 60372DC961D8941790324E27 /* SHPKeyboardInfo.h */; };
+		60372A0E9AC95C356FF0186E /* SHPEventInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 60372EB461A852B952A2F6F3 /* SHPEventInfo.m */; };
 		A68A62CD1B32E2D1007EEF57 /* SHPKeyboardAwareness.h in Headers */ = {isa = PBXBuildFile; fileRef = A68A62C71B32E2D1007EEF57 /* SHPKeyboardAwareness.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A68A62CE1B32E2D1007EEF57 /* SHPKeyboardAwarenessClient.h in Headers */ = {isa = PBXBuildFile; fileRef = A68A62C81B32E2D1007EEF57 /* SHPKeyboardAwarenessClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A68A62CF1B32E2D1007EEF57 /* SHPKeyboardEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = A68A62C91B32E2D1007EEF57 /* SHPKeyboardEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -17,8 +21,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3625990B1DF6AFD100DA706C /* SHPKeyboardAwarenessObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHPKeyboardAwarenessObserver.h; sourceTree = "<group>"; };
-		3625990C1DF6AFD100DA706C /* SHPKeyboardAwarenessObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHPKeyboardAwarenessObserver.m; sourceTree = "<group>"; };
+		3625990F1DF6BF7100DA706C /* SHPKeyboardAwarenessObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SHPKeyboardAwarenessObserver.h; path = Source/SHPKeyboardAwarenessObserver.h; sourceTree = SOURCE_ROOT; };
+		362599101DF6BF7100DA706C /* SHPKeyboardAwarenessObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SHPKeyboardAwarenessObserver.m; path = Source/SHPKeyboardAwarenessObserver.m; sourceTree = SOURCE_ROOT; };
+		6037209823A4E23739CC5B64 /* SHPKeyboardInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SHPKeyboardInfo.m; path = Source/SHPKeyboardInfo.m; sourceTree = SOURCE_ROOT; };
+		603720B4AAB7D60E176B4DBA /* SHPEventInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SHPEventInfo.h; path = Source/SHPEventInfo.h; sourceTree = SOURCE_ROOT; };
+		60372DC961D8941790324E27 /* SHPKeyboardInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SHPKeyboardInfo.h; path = Source/SHPKeyboardInfo.h; sourceTree = SOURCE_ROOT; };
+		60372EB461A852B952A2F6F3 /* SHPEventInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SHPEventInfo.m; path = Source/SHPEventInfo.m; sourceTree = SOURCE_ROOT; };
 		A68A62A91B32E28F007EEF57 /* SHPKeyboardAwareness.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SHPKeyboardAwareness.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A68A62AD1B32E28F007EEF57 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A68A62C71B32E2D1007EEF57 /* SHPKeyboardAwareness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SHPKeyboardAwareness.h; path = ../Source/SHPKeyboardAwareness.h; sourceTree = "<group>"; };
@@ -60,13 +68,17 @@
 		A68A62AB1B32E28F007EEF57 /* SHPKeyboardAwareness */ = {
 			isa = PBXGroup;
 			children = (
-				3625990B1DF6AFD100DA706C /* SHPKeyboardAwarenessObserver.h */,
-				3625990C1DF6AFD100DA706C /* SHPKeyboardAwarenessObserver.m */,
+				3625990F1DF6BF7100DA706C /* SHPKeyboardAwarenessObserver.h */,
+				362599101DF6BF7100DA706C /* SHPKeyboardAwarenessObserver.m */,
 				A68A62C71B32E2D1007EEF57 /* SHPKeyboardAwareness.h */,
 				A68A62C81B32E2D1007EEF57 /* SHPKeyboardAwarenessClient.h */,
 				A68A62C91B32E2D1007EEF57 /* SHPKeyboardEvent.h */,
 				A68A62CA1B32E2D1007EEF57 /* SHPKeyboardEvent.m */,
 				A68A62AC1B32E28F007EEF57 /* Supporting Files */,
+				60372EB461A852B952A2F6F3 /* SHPEventInfo.m */,
+				603720B4AAB7D60E176B4DBA /* SHPEventInfo.h */,
+				6037209823A4E23739CC5B64 /* SHPKeyboardInfo.m */,
+				60372DC961D8941790324E27 /* SHPKeyboardInfo.h */,
 			);
 			path = SHPKeyboardAwareness;
 			sourceTree = "<group>";
@@ -87,9 +99,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				A68A62CE1B32E2D1007EEF57 /* SHPKeyboardAwarenessClient.h in Headers */,
-				3625990D1DF6AFD100DA706C /* SHPKeyboardAwarenessObserver.h in Headers */,
+				362599111DF6BF7100DA706C /* SHPKeyboardAwarenessObserver.h in Headers */,
 				A68A62CF1B32E2D1007EEF57 /* SHPKeyboardEvent.h in Headers */,
 				A68A62CD1B32E2D1007EEF57 /* SHPKeyboardAwareness.h in Headers */,
+				6037210D513DD95762851460 /* SHPEventInfo.h in Headers */,
+				603724846C438D402ADFB16A /* SHPKeyboardInfo.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -160,8 +174,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3625990E1DF6AFD100DA706C /* SHPKeyboardAwarenessObserver.m in Sources */,
+				362599121DF6BF7100DA706C /* SHPKeyboardAwarenessObserver.m in Sources */,
 				A68A62D01B32E2D1007EEF57 /* SHPKeyboardEvent.m in Sources */,
+				60372A0E9AC95C356FF0186E /* SHPEventInfo.m in Sources */,
+				60372178A0C5EB83A40459CA /* SHPKeyboardInfo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
