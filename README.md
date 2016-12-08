@@ -15,6 +15,9 @@ When you enable `SHPKeyboardAwareness` you'll be notified every time the keyboar
 
 ![](example.gif)
 
+If the conflicting view is a UITextView, the required offset is calculated for the caret (insertion point)
+![](example_caret_tracking.gif)
+
 See the included example project in the `Example/` folder.
 
 # Usage
@@ -42,7 +45,7 @@ The first responder (`UITextField` or `UITextView`) will be passed in as part of
 
 ## The conflicting view
 
-The `SHPKeyboardEvent` that you receive via the signal or the delegate method contains a reference to any conflicting view in the property
+The `SHPKeyboardEvent` that you receive via the delegate method contains a reference to any conflicting view in the property
 
 ```Objective-C
 @property (nonatomic, readonly) UIView *conflictingView;
