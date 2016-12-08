@@ -158,9 +158,20 @@ CGRect shp_normalizedFrame(CGRect frame, UIWindow *window) {
                 handleKeyboardEventsForView = YES;
             }
             if( handleKeyboardEventsForView ) {
-                SHPEventInfo *eventInfoCopy = [self.eventInfo copy];
-                eventInfoCopy.conflictView = self.presetConflictingView?: view;
-                self.eventInfo = eventInfoCopy;
+                if( self.offsetType == SHPKeyboardAwarenessOffsetTypeCaret && [view isKindOfClass:[UITextView class]]) {
+                    // We need to set the view assync, otherwise, we will be served the wrong frame for the selected textRange on the UITextView
+                    // This might cause the offset to be calculated wrong
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        SHPEventInfo *eventInfoCopy = [self.eventInfo copy];
+                        eventInfoCopy.conflictView = self.presetConflictingView?: view;
+                        self.eventInfo = eventInfoCopy;
+                    });
+                }
+                else {
+                    SHPEventInfo *eventInfoCopy = [self.eventInfo copy];
+                    eventInfoCopy.conflictView = self.presetConflictingView?: view;
+                    self.eventInfo = eventInfoCopy;
+                }
             }
         }
     }
@@ -180,7 +191,6 @@ CGRect shp_normalizedFrame(CGRect frame, UIWindow *window) {
 - (void)keyboardNotification: (NSNotification *_Nonnull)notification {
 
     if( notification.userInfo == nil ) { return; }
-
     CGRect keyboardFrame = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
     NSTimeInterval animationDuration = [notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     UIViewAnimationCurve animationCurve = (UIViewAnimationCurve)[notification.userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue];
@@ -249,7 +259,20 @@ CGRect shp_normalizedFrame(CGRect frame, UIWindow *window) {
     }
 }
 
-
+- (CGRect)selectedRectForTextInput: (id<UITextInput>)textInput {
+    UITextRange *selectedTextRange = [textInput selectedTextRange];
+    if( selectedTextRange ) {
+        NSArray<UITextSelectionRect *> *textRanges = [textInput selectionRectsForRange:selectedTextRange];
+        if(textRanges.firstObject) {
+            UITextSelectionRect *firstRange = textRanges.firstObject;
+            return firstRange.rect;
+        }
+        else {
+            return CGRectZero;
+        }
+    }
+    return CGRectZero;
+}
 
 - (SHPKeyboardEvent *)showEventWithKeyboardInfo: (SHPKeyboardInfo *)keyboardInfo conflictingView: (UIView *)view {
     // Window stuff
@@ -261,10 +284,24 @@ CGRect shp_normalizedFrame(CGRect frame, UIWindow *window) {
 
     // View stuff
     CGRect viewBounds = view.bounds;
-    CGRect viewRect = [view convertRect:viewBounds toView:nil];
+    
+    CGRect viewRect;
+    if(self.offsetType == SHPKeyboardAwarenessOffsetTypeCaret && [view conformsToProtocol:@protocol(UITextInput)]) {
+        CGRect selectedRect = [self selectedRectForTextInput:(id<UITextInput>)view];
+        if(CGRectEqualToRect(selectedRect, CGRectZero)) {
+            viewRect = [view convertRect:viewBounds toView:nil];
+        }
+        else {
+            viewRect = [view convertRect:selectedRect toView:nil];
+        }
+    }
+    else {
+        //self.offsetType == SHPKeyboardAwarenessOffsetTypeBottom
+        viewRect = [view convertRect:viewBounds toView:nil];
+    }
     CGRect normViewBounds = shp_normalizedFrame(viewRect, window);
     CGFloat viewBottom = CGRectGetMaxY(normViewBounds);
-
+    
     // Business stuff
     CGFloat offset = keyboardTop - viewBottom;
     offset = offset > 0 ? 0 : offset;

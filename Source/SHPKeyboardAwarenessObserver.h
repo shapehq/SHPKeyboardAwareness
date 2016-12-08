@@ -10,11 +10,19 @@
 
 @protocol SHPKeyboardAwarenessClient;
 
+typedef NS_ENUM(NSUInteger, SHPKeyboardAwarenessOffsetType){
+    SHPKeyboardAwarenessOffsetTypeBottom,
+    SHPKeyboardAwarenessOffsetTypeCaret // insertion point
+};
+
 @interface SHPKeyboardAwarenessObserver : NSObject
 @property (nonatomic, weak, nullable) id<SHPKeyboardAwarenessClient> delegate;
 // The observer will only observe childviews within in the observerSuperView
 // If the superview is not set, the observer will send keyboard events for all conflicting views (even across viewControllers)
 @property (nonatomic, strong, nullable) UIView *observerSuperView;
+
+// The point the observer will try to calculate offset to
+@property (nonatomic, assign) SHPKeyboardAwarenessOffsetType offsetType;
 
 - (instancetype _Nonnull)initWithObserverSuperView: (UIView *_Nullable)superView;
 - (instancetype _Nonnull)initWithObserveView: (UIView *_Nullable)view observerSuperView: (UIView *_Nullable)superView;
