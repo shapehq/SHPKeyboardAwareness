@@ -12,11 +12,11 @@
 
 /// The offsetType defines how the Observer will calculate the required offset
 typedef NS_ENUM(NSUInteger, SHPKeyboardAwarenessOffsetType){
+    /// (Default) Caret - the offset required to have Caret (insertion point) above the keyboard
+    /// If set as offsetType, this will only apply if the observeView is a UITextView (or the observeView isn't set)
+    SHPKeyboardAwarenessOffsetTypeCaret,
     /// Bottom - offset required to move the bottom of a view above the keyboard
     SHPKeyboardAwarenessOffsetTypeBottom,
-    /// Caret - the offset required to have Caret (insertion point) above the keyboard
-    /// If set as offsetType, this will only apply if the observeView is a UITextView (or the observeView isn't set)
-    SHPKeyboardAwarenessOffsetTypeCaret // insertion point
 };
 
 @interface SHPKeyboardAwarenessObserver : NSObject

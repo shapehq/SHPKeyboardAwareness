@@ -286,9 +286,9 @@ CGRect shp_normalizedFrame(CGRect frame, UIWindow *window) {
     CGRect viewBounds = view.bounds;
     
     CGRect viewRect;
-    if(self.offsetType == SHPKeyboardAwarenessOffsetTypeCaret && [view conformsToProtocol:@protocol(UITextInput)]) {
+    if(self.offsetType == SHPKeyboardAwarenessOffsetTypeCaret && [view isKindOfClass:[UITextView class]]) {
         CGRect selectedRect = [self selectedRectForTextInput:(id<UITextInput>)view];
-        if(CGRectEqualToRect(selectedRect, CGRectZero)) {
+        if(CGRectEqualToRect(selectedRect, CGRectZero) || isinf(selectedRect.origin.x) || isinf(selectedRect.origin.y) || isinf(selectedRect.size.height) || isinf(selectedRect.size.width)) {
             viewRect = [view convertRect:viewBounds toView:nil];
         }
         else {
@@ -304,7 +304,8 @@ CGRect shp_normalizedFrame(CGRect frame, UIWindow *window) {
     
     // Business stuff
     CGFloat offset = keyboardTop - viewBottom;
-    offset = offset > 0 ? 0 : offset;
+    offset = offset > 0 ? 0 : isinf(offset) ? 0 : offset;
+    
 
     CGRect visibleRect = shp_normalizedFrame(window.frame, window);
     visibleRect.size.height -= normKeyboardRect.size.height;
