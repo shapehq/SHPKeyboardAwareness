@@ -10,6 +10,8 @@
 #import "SHPKeyboardAwarenessClient.h"
 #import "SHPEventInfo.h"
 #import "SHPKeyboardInfo.h"
+#import "SHPKeyboardAwarenessScrollViewClient.h"
+#import "SHPKeyboardAwarenessConstraintClient.h"
 
 static const CGAffineTransform kNormalRotation     = (CGAffineTransform){1,  0, -0,  1, 0, 0};
 static const CGAffineTransform kRightRotation      = (CGAffineTransform){0, -1,  1,  0, 0, 0};
@@ -60,6 +62,9 @@ CGRect shp_normalizedFrame(CGRect frame, UIWindow *window) {
 @property (nonatomic, strong) SHPKeyboardEvent *event;
 @property (nonatomic, strong) SHPEventInfo *eventInfo;
 @property (nonatomic, strong) UIView *presetConflictingView;
+
+/// For default observing of views
+@property (nonatomic, strong, nullable) id client;
 @end
 
 @implementation SHPKeyboardAwarenessObserver
@@ -114,6 +119,20 @@ CGRect shp_normalizedFrame(CGRect frame, UIWindow *window) {
 
 + (instancetype)ObserveView:(UIView *_Nullable)view withDelegate:(id <SHPKeyboardAwarenessClient> _Nullable)delegate observerSuperView:(UIView * _Nullable)superView {
     return [[SHPKeyboardAwarenessObserver alloc] initWithObserveView:view delegate:delegate observerSuperView:superView];
+}
+
++ (instancetype _Nonnull)ObserveScrollView: (UIScrollView *_Nonnull)view conflictingViewPadding: (CGFloat)padding {
+    SHPKeyboardAwarenessScrollViewClient *observerClient = [SHPKeyboardAwarenessScrollViewClient ClientWithView: view conflictingViewPadding: padding];
+    SHPKeyboardAwarenessObserver *observer = [[SHPKeyboardAwarenessObserver alloc] initWithObserveView:nil delegate:observerClient observerSuperView:view];
+    observer.client = observerClient;
+    return observer;
+}
+
++ (instancetype _Nonnull)ObserveView: (UIView *_Nonnull)view verticalConstraint: (NSLayoutConstraint *_Nonnull)constraint conflictingViewPadding: (CGFloat)padding {
+    SHPKeyboardAwarenessConstraintClient *observerClient = [SHPKeyboardAwarenessConstraintClient ClientWithView: view verticalConstraint: constraint conflictingViewPadding: padding];
+    SHPKeyboardAwarenessObserver *observer = [[SHPKeyboardAwarenessObserver alloc] initWithObserveView:nil delegate:observerClient observerSuperView:view];
+    observer.client = observerClient;
+    return observer;
 }
 
 
@@ -300,6 +319,12 @@ CGRect shp_normalizedFrame(CGRect frame, UIWindow *window) {
         viewRect = [view convertRect:viewBounds toView:nil];
     }
     CGRect normViewBounds = shp_normalizedFrame(viewRect, window);
+
+    // Additional padding around the view
+    if(self.delegate && [self.delegate respondsToSelector:@selector(shpKeyboardAwarenessPaddingBetweenKeyboardAndView:)]) {
+        normViewBounds = CGRectInset(normViewBounds, 0, -1 * [self.delegate shpKeyboardAwarenessPaddingBetweenKeyboardAndView:view]);
+    }
+
     CGFloat viewBottom = CGRectGetMaxY(normViewBounds);
     
     // Business stuff
@@ -337,6 +362,5 @@ CGRect shp_normalizedFrame(CGRect frame, UIWindow *window) {
 
     return event;
 }
-
 
 @end

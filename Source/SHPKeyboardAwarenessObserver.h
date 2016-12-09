@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @protocol SHPKeyboardAwarenessClient;
+@class SHPKeyboardAwarenessScrollViewClient;
 
 /// The offsetType defines how the Observer will calculate the required offset
 typedef NS_ENUM(NSUInteger, SHPKeyboardAwarenessOffsetType){
@@ -36,21 +37,21 @@ typedef NS_ENUM(NSUInteger, SHPKeyboardAwarenessOffsetType){
 /// The receiver will get keyboard events during its life time. The receiver must implement the keyboardTriggeredEvent: method as defined
 /// in the SHPKeyboardAwarenessClient protocol. Does not currently support events for rotation while the keyboard is visible. If required, use
 /// ObserveView:observerSuperView: instead.
-/// @param observerSuperView The view that contains the observed views, the Observer will not callback with events that are not childViews of the superView
+/// @param superView The view that contains the observed views, the Observer will not callback with events that are not childViews of the superView
 + (instancetype _Nonnull)ObserveWithObserverSuperView: (UIView *_Nullable)superView;
 
 /// The receiver will get keyboard events during its life time. The receiver must implement the keyboardTriggeredEvent: method as defined
 /// in the SHPKeyboardAwarenessClient protocol. Does not currently support events for rotation while the keyboard is visible. If required, use
 /// ObserveView:withDelegate:observerSuperView: instead.
 /// @param delegate The delegate to receive keyboardevents
-/// @param observerSuperView The view that contains the observed views, the Observer will not callback with events that are not childViews of the superView
+/// @param superView The view that contains the observed views, the Observer will not callback with events that are not childViews of the superView
 + (instancetype _Nonnull)ObserveWithDelegate: (id<SHPKeyboardAwarenessClient> _Nullable) delegate observerSuperView: (UIView *_Nullable)superView;
 
 /// The receiver will get keyboard events during its life time. The receiver must implement the keyboardTriggeredEvent: method as defined
 /// in the SHPKeyboardAwarenessClient protocol. Optionally, provide a view which you want to limit the events to. Keyboard events will be
 /// sent, only when view conflicts with the keyboard bounds.
 /// @param view The view you want to stay clear of the keyboard. Provide nil to get same functionality as ObserveWithObserverSuperView:
-/// @param observerSuperView The view that contains the observed views, the Observer will not callback with events that are not childViews of the superView
+/// @param superView The view that contains the observed views, the Observer will not callback with events that are not childViews of the superView
 + (instancetype _Nonnull)ObserveView: (UIView *_Nullable)view observerSuperView: (UIView *_Nullable)superView;
 
 /// The receiver will get keyboard events during its life time. The receiver must implement the keyboardTriggeredEvent: method as defined
@@ -58,7 +59,21 @@ typedef NS_ENUM(NSUInteger, SHPKeyboardAwarenessOffsetType){
 /// sent, only when view conflicts with the keyboard bounds.
 /// @param view The view you want to stay clear of the keyboard. Provide nil to get same functionality as ObserveWithDelegate:observerSuperView:
 /// @param delegate The delegate to receive keyboardevents
-/// @param observerSuperView The view that contains the observed views, the Observer will not callback with events that are not childViews of the superView
+/// @param superView The view that contains the observed views, the Observer will not callback with events that are not childViews of the superView
 + (instancetype _Nonnull)ObserveView: (UIView *_Nullable)view withDelegate: (id<SHPKeyboardAwarenessClient> _Nullable) delegate observerSuperView: (UIView *_Nullable)superView;
 
+/// Makes the observer observe and handle events for a scrollView. The observer will be the delegate for all events
+/// If you don't wan't to handle the offset your self, then use this method, or, if the view isn't a ScrollView, you might wan't to use the ObserveView:verticalConstraint:conflictingViewPadding:
+/// Note, if you set the delegate after initialisation, you'll have to handle the offset yourself
+/// @param view The scrollView to observe
+/// @param padding The padding will be added around a view that is obscured by the keyboard.
++ (instancetype _Nonnull)ObserveScrollView: (UIScrollView *_Nonnull)view conflictingViewPadding: (CGFloat)padding;
+
+/// Makes the observer observe and handle events for a view. The observer will be the delegate for all events
+/// Provide a vertical constraint, which the observer can use to reposition the view
+/// Note, if you set the delegate after initialisation, you'll have to handle the offset yourself
+/// @param view The view to observe
+/// @param constraint Vertical constraint used to move the view
+/// @param padding Padding will be added around the conflicting view
++ (instancetype _Nonnull)ObserveView: (UIView *_Nonnull)view verticalConstraint: (NSLayoutConstraint *_Nonnull)constraint conflictingViewPadding: (CGFloat)padding;
 @end

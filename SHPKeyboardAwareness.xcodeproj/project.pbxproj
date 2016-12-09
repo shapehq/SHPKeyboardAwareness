@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		362599111DF6BF7100DA706C /* SHPKeyboardAwarenessObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 3625990F1DF6BF7100DA706C /* SHPKeyboardAwarenessObserver.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		362599121DF6BF7100DA706C /* SHPKeyboardAwarenessObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 362599101DF6BF7100DA706C /* SHPKeyboardAwarenessObserver.m */; };
+		3683758E1DFA96280047919E /* SHPKeyboardAwarenessConstraintClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 3683758A1DFA96280047919E /* SHPKeyboardAwarenessConstraintClient.h */; };
+		3683758F1DFA96280047919E /* SHPKeyboardAwarenessConstraintClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 3683758B1DFA96280047919E /* SHPKeyboardAwarenessConstraintClient.m */; };
+		368375901DFA96280047919E /* SHPKeyboardAwarenessScrollViewClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 3683758C1DFA96280047919E /* SHPKeyboardAwarenessScrollViewClient.h */; };
+		368375911DFA96280047919E /* SHPKeyboardAwarenessScrollViewClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 3683758D1DFA96280047919E /* SHPKeyboardAwarenessScrollViewClient.m */; };
 		6037210D513DD95762851460 /* SHPEventInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 603720B4AAB7D60E176B4DBA /* SHPEventInfo.h */; };
 		60372178A0C5EB83A40459CA /* SHPKeyboardInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6037209823A4E23739CC5B64 /* SHPKeyboardInfo.m */; };
 		603724846C438D402ADFB16A /* SHPKeyboardInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 60372DC961D8941790324E27 /* SHPKeyboardInfo.h */; };
@@ -23,6 +27,10 @@
 /* Begin PBXFileReference section */
 		3625990F1DF6BF7100DA706C /* SHPKeyboardAwarenessObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SHPKeyboardAwarenessObserver.h; path = Source/SHPKeyboardAwarenessObserver.h; sourceTree = SOURCE_ROOT; };
 		362599101DF6BF7100DA706C /* SHPKeyboardAwarenessObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SHPKeyboardAwarenessObserver.m; path = Source/SHPKeyboardAwarenessObserver.m; sourceTree = SOURCE_ROOT; };
+		3683758A1DFA96280047919E /* SHPKeyboardAwarenessConstraintClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SHPKeyboardAwarenessConstraintClient.h; path = Source/SHPKeyboardAwarenessConstraintClient.h; sourceTree = SOURCE_ROOT; };
+		3683758B1DFA96280047919E /* SHPKeyboardAwarenessConstraintClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SHPKeyboardAwarenessConstraintClient.m; path = Source/SHPKeyboardAwarenessConstraintClient.m; sourceTree = SOURCE_ROOT; };
+		3683758C1DFA96280047919E /* SHPKeyboardAwarenessScrollViewClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SHPKeyboardAwarenessScrollViewClient.h; path = Source/SHPKeyboardAwarenessScrollViewClient.h; sourceTree = SOURCE_ROOT; };
+		3683758D1DFA96280047919E /* SHPKeyboardAwarenessScrollViewClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SHPKeyboardAwarenessScrollViewClient.m; path = Source/SHPKeyboardAwarenessScrollViewClient.m; sourceTree = SOURCE_ROOT; };
 		6037209823A4E23739CC5B64 /* SHPKeyboardInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SHPKeyboardInfo.m; path = Source/SHPKeyboardInfo.m; sourceTree = SOURCE_ROOT; };
 		603720B4AAB7D60E176B4DBA /* SHPEventInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SHPEventInfo.h; path = Source/SHPEventInfo.h; sourceTree = SOURCE_ROOT; };
 		60372DC961D8941790324E27 /* SHPKeyboardInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SHPKeyboardInfo.h; path = Source/SHPKeyboardInfo.h; sourceTree = SOURCE_ROOT; };
@@ -79,6 +87,10 @@
 				603720B4AAB7D60E176B4DBA /* SHPEventInfo.h */,
 				6037209823A4E23739CC5B64 /* SHPKeyboardInfo.m */,
 				60372DC961D8941790324E27 /* SHPKeyboardInfo.h */,
+				3683758A1DFA96280047919E /* SHPKeyboardAwarenessConstraintClient.h */,
+				3683758B1DFA96280047919E /* SHPKeyboardAwarenessConstraintClient.m */,
+				3683758C1DFA96280047919E /* SHPKeyboardAwarenessScrollViewClient.h */,
+				3683758D1DFA96280047919E /* SHPKeyboardAwarenessScrollViewClient.m */,
 			);
 			path = SHPKeyboardAwareness;
 			sourceTree = "<group>";
@@ -100,6 +112,8 @@
 			files = (
 				A68A62CE1B32E2D1007EEF57 /* SHPKeyboardAwarenessClient.h in Headers */,
 				362599111DF6BF7100DA706C /* SHPKeyboardAwarenessObserver.h in Headers */,
+				368375901DFA96280047919E /* SHPKeyboardAwarenessScrollViewClient.h in Headers */,
+				3683758E1DFA96280047919E /* SHPKeyboardAwarenessConstraintClient.h in Headers */,
 				A68A62CF1B32E2D1007EEF57 /* SHPKeyboardEvent.h in Headers */,
 				A68A62CD1B32E2D1007EEF57 /* SHPKeyboardAwareness.h in Headers */,
 				6037210D513DD95762851460 /* SHPEventInfo.h in Headers */,
@@ -176,8 +190,10 @@
 			files = (
 				362599121DF6BF7100DA706C /* SHPKeyboardAwarenessObserver.m in Sources */,
 				A68A62D01B32E2D1007EEF57 /* SHPKeyboardEvent.m in Sources */,
+				3683758F1DFA96280047919E /* SHPKeyboardAwarenessConstraintClient.m in Sources */,
 				60372A0E9AC95C356FF0186E /* SHPEventInfo.m in Sources */,
 				60372178A0C5EB83A40459CA /* SHPKeyboardInfo.m in Sources */,
+				368375911DFA96280047919E /* SHPKeyboardAwarenessScrollViewClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
