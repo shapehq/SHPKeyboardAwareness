@@ -22,6 +22,16 @@ See the included example project in the `Example/` folder.
 
 # Usage
 
+## Default usage
+
+For a default implementation, where you don't need to handle things yourself, use:
+
+```Objective-C
+[SHPKeyboardAwarenessObserver ObserveView:view verticalConstraint:bottomConstraint conflictingViewPadding:20];
+[SHPKeyboardAwarenessObserver ObserveScrollView:scrollView conflictingViewPadding:20];
+```
+
+If you need a more specialized implementation, you can use the delegation methods.
 
 ## Delegation
 
