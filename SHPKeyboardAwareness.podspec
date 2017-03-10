@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "SHPKeyboardAwareness"
-  s.version          = "2.4.1"
+  s.version          = "3.0.0"
   s.summary          = "Handle and avoid the keyboard obstructing your views in a very easy and robust way."
   s.description      = "Get notified when you need to move your text-field / -view.
                         Does not require overriding anything. All you need to do is subscribe to a signal
@@ -15,6 +15,6 @@ Pod::Spec.new do |s|
 
   s.source_files = 'Source/**/*.{h,m}'
 
-  s.public_header_files = 'Source/SHPKeyboardAwareness.h', 'Source/NSObject+SHPKeyboardAwareness.h', 'Source/SHPKeyboardEvent.h', 'Source/SHPKeyboardAwarenessClient.h', 'Source/SHPKeyboardAwarenessObserver.h'
+  s.public_header_files = 'Source/SHPKeyboardAwareness.h', 'Source/SHPKeyboardAwarenessClient.h', 'Source/SHPKeyboardEvent.h', 'Source/SHPKeyboardAwarenessObserver.h'
   s.frameworks = 'UIKit'
 end
