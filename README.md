@@ -15,29 +15,30 @@ When you enable `SHPKeyboardAwareness` you'll be notified every time the keyboar
 
 ![](example.gif)
 
+If the conflicting view is a UITextView, the required offset is calculated for the caret (insertion point)
+![](example_caret_tracking.gif)
+
 See the included example project in the `Example/` folder.
 
 # Usage
 
-`SHPKeyboardAwareness` uses [ReactiveCocoa](https://github.com/ReactiveCocoa/ReactiveCocoa) under the hood. If you're already using Reactive Cocoa, you can receive signals with the keyboard events or alternatively you can use a delegate based approach.
+## Default usage
 
-## Reactive Cocoa Signals
-
-To use `SHPKeyboardAwareness` just use one of the two following signals
+For a default implementation, where you don't need to handle things yourself, use:
 
 ```Objective-C
-- (RACSignal *)shp_keyboardAwarenessSignal
-- (RACSignal *)shp_keyboardAwarenessSignalForView:(UIView *)view
+[SHPKeyboardAwarenessObserver ObserveView:view verticalConstraint:bottomConstraint conflictingViewPadding:20];
+[SHPKeyboardAwarenessObserver ObserveScrollView:scrollView conflictingViewPadding:20];
 ```
 
-The signals deliver an instance of `SHPKeyboardEvent` whenever the keyboard appears, disappears or the first responder changes. The event contains information on any conflicting view.
+If you need a more specialized implementation, you can use the delegation methods.
 
 ## Delegation
 
-`SHPKeyboardAwareness` is implemented as a category on `NSObject` and is easy to use. To enable `SHPKeyboardAwareness` for a specific object just call:
+`SHPKeyboardAwareness` inherits from `NSObject` and is easy to use. To setup `SHPKeyboardAwareness` just call:
 
 ```Objective-C
-[self shp_engageKeyboardAwareness];
+[SHPKeyboardAwarenessObserver ObserveWithDeledgate:self];
 ```
 
 This will subscribe `self` to any keyboard events.
@@ -54,7 +55,7 @@ The first responder (`UITextField` or `UITextView`) will be passed in as part of
 
 ## The conflicting view
 
-The `SHPKeyboardEvent` that you receive via the signal or the delegate method contains a reference to any conflicting view in the property
+The `SHPKeyboardEvent` that you receive via the delegate method contains a reference to any conflicting view in the property
 
 ```Objective-C
 @property (nonatomic, readonly) UIView *conflictingView;
@@ -73,7 +74,11 @@ and this information can be used to move the view so that it is no longer obstru
 In this example we subscribe a view controller to notifications for any first responder `UITextField` or `UITextView` that may conflict with the keyboard:
 
 ```Objective-C
-#import "SHPKeyboardAwareness.h"
+@import SHPKeyboardAwareness;
+
+@interface ViewController ()
+@property (nonatomic, strong) SHPKeyboardAwarenessObserver *keyboardAwareness;
+@end
 
 @implementation ViewController
 ...
@@ -81,7 +86,7 @@ In this example we subscribe a view controller to notifications for any first re
     [super viewDidLoad];
     
     // Subscribe to keyboard events. The receiver (self) will be automatically unsubscribed when deallocated
-    [self shp_engageKeyboardAwareness];
+    self.keyboardAwareness = [SHPKeyboardAwarenessObserver ObserveWithDelegate:self];
 }
 
 - (void)keyboardTriggeredEvent:(SHPKeyboardEvent *)keyboardEvent {
@@ -140,7 +145,12 @@ Furthermore:
 In this example we subscribe to notifications for when a specific view is obstructed by the keyboard. As an example, you may have a container view around the `UITextField` or `UITextView` that you want to keep clear of the keyboard, for instance because the container view contains a `UIButton` that must be fully visible.
 
 ```Objective-C
-#import "SHPKeyboardAwareness.h"
+@import SHPKeyboardAwareness;
+
+@interface ViewController ()
+@property (nonatomic, strong) SHPKeyboardAwarenessObserver *keyboardAwareness;
+@end
+
 
 @implementation ViewController
 ...
@@ -148,7 +158,7 @@ In this example we subscribe to notifications for when a specific view is obstru
     [super viewDidLoad];
     
     // Subscribe to keyboard events. The receiver (self) will be automatically unsubscribed when deallocated
-    [self shp_engageKeyboardAwarenessForView:_myView];
+    self.keyboardAwareness = [SHPKeyboardAwarenessObserver ObserveView: _myView withDelegate:self];
 }
 
 - (void)keyboardTriggeredEvent:(SHPKeyboardEvent *)event {

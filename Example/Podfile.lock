@@ -1,13 +1,5 @@
 PODS:
-  - ReactiveCocoa (2.4.7):
-    - ReactiveCocoa/UI (= 2.4.7)
-  - ReactiveCocoa/Core (2.4.7):
-    - ReactiveCocoa/no-arc
-  - ReactiveCocoa/no-arc (2.4.7)
-  - ReactiveCocoa/UI (2.4.7):
-    - ReactiveCocoa/Core
-  - SHPKeyboardAwareness (2.0.0):
-    - ReactiveCocoa (~> 2.4.7)
+  - SHPKeyboardAwareness (2.4.1)
 
 DEPENDENCIES:
   - SHPKeyboardAwareness (from `../`)
@@ -17,7 +9,8 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  ReactiveCocoa: 313fc53cc9aeb2bbbc3f5f13c7eac16478d9af8f
-  SHPKeyboardAwareness: 5d8a2035de6d5a1063288a7af972c477f7f39a49
+  SHPKeyboardAwareness: 7056dd6d1a23d45d1c174d30f257a8d083bd3a08
 
-COCOAPODS: 0.35.0
+PODFILE CHECKSUM: dc4919f25d8ac7e1e5b1255cd3ff32c348d7e1f4
+
+COCOAPODS: 1.0.1

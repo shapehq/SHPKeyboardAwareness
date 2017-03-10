@@ -1,3 +1,7 @@
+v3.0.0
+======
+Removed dependency on ReactiveCocoa. Improved offset calculation to calculate based on the caret (insertion point), if the conflicting view is a UITextView.
+
 v2.1.1
 ======
 

@@ -1,5 +1,6 @@
 /.DS_Store
 .DS_Store
+.idea/
 Example/Build
 Example/Pods
 Example/SHPKeyboardAwareness.xcodeproj/project.xcworkspace/xcuserdata

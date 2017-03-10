@@ -2,7 +2,7 @@
 // SHPKeyboardAwareness
 // SHPKeyboardAwarenessClient.h
 //
-// Copyright (c) 2014-2015 SHAPE A/S. All rights reserved.
+// Copyright (c) 2014-2016 SHAPE A/S. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -11,6 +11,11 @@
 
 @protocol SHPKeyboardAwarenessClient <NSObject>
 
-- (void)keyboardTriggeredEvent:(nullable SHPKeyboardEvent *)keyboardEvent;
+- (void)keyboardTriggeredEvent:(nonnull SHPKeyboardEvent *)keyboardEvent;
 
+@optional
+/// The default padding between the keyboard and the view/caret is 0
+/// Implement this delegate method to change the padding
+/// @param view The conflicting view
+- (CGFloat)shpKeyboardAwarenessPaddingBetweenKeyboardAndView: (UIView *_Nonnull)view;
 @end
