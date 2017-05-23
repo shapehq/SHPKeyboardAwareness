@@ -12,5 +12,5 @@
 @interface SHPKeyboardAwarenessScrollViewClient : NSObject <SHPKeyboardAwarenessClient>
 - (instancetype _Nonnull)initWithView:(UIScrollView *_Nonnull)view conflictingViewPadding:(CGFloat)padding;
 
-+ (instancetype _Nonnull)ClientWithView:(UIScrollView *_Nonnull)view conflictingViewPadding:(CGFloat)padding;
++ (instancetype _Nonnull)clientWithView:(UIScrollView *_Nonnull)view conflictingViewPadding:(CGFloat)padding;
 @end

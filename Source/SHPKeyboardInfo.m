@@ -16,7 +16,7 @@
 @implementation SHPKeyboardInfo {
 
 }
-+ (SHPKeyboardInfo *)InfoWithEventType:(SHPKeyboardEventType)eventType frame:(CGRect)keyboardRect animationDuration:(NSTimeInterval)animationDuration animationOption:(UIViewAnimationCurve)animationOption {
++ (SHPKeyboardInfo *)infoWithEventType:(SHPKeyboardEventType)eventType frame:(CGRect)keyboardRect animationDuration:(NSTimeInterval)animationDuration animationOption:(UIViewAnimationCurve)animationOption {
     return [[SHPKeyboardInfo alloc] initWithEventType: eventType frame: keyboardRect animationDuration: animationDuration animationOption: animationOption];
 }
 

@@ -10,7 +10,7 @@
 
 // Internal client, used for a default implementation of handing keyboardEvents with a Constraint type
 @interface SHPKeyboardAwarenessConstraintClient : NSObject <SHPKeyboardAwarenessClient>
-+ (SHPKeyboardAwarenessConstraintClient *)ClientWithView:(UIView *)view verticalConstraint:(NSLayoutConstraint *)constraint conflictingViewPadding:(CGFloat)padding;
++ (SHPKeyboardAwarenessConstraintClient *)clientWithView:(UIView *)view verticalConstraint:(NSLayoutConstraint *)constraint conflictingViewPadding:(CGFloat)padding;
 
 - (instancetype)initWithView:(UIView *)view verticalConstraint:(NSLayoutConstraint *)constraint conflictingViewPadding:(CGFloat)padding;
 @end

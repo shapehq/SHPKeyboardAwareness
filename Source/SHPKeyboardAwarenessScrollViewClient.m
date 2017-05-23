@@ -27,7 +27,7 @@
     return self;
 }
 
-+ (instancetype _Nonnull)ClientWithView:(UIScrollView *_Nonnull)view conflictingViewPadding:(CGFloat)padding {
++ (instancetype _Nonnull)clientWithView:(UIScrollView *_Nonnull)view conflictingViewPadding:(CGFloat)padding {
     return [[SHPKeyboardAwarenessScrollViewClient alloc] initWithView: view conflictingViewPadding: padding];
 }
 

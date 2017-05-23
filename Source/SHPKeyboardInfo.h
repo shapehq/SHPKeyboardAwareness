@@ -12,7 +12,7 @@
 @property(nonatomic, readonly) NSTimeInterval animationDuration;
 @property(nonatomic, readonly) UIViewAnimationCurve animationOption;
 
-+ (SHPKeyboardInfo *)InfoWithEventType:(SHPKeyboardEventType)eventType frame:(CGRect)keyboardRect animationDuration:(NSTimeInterval)animationDuration animationOption:(UIViewAnimationCurve)animationOption;
++ (SHPKeyboardInfo *)infoWithEventType:(SHPKeyboardEventType)eventType frame:(CGRect)keyboardRect animationDuration:(NSTimeInterval)animationDuration animationOption:(UIViewAnimationCurve)animationOption;
 - (instancetype)initWithEventType:(SHPKeyboardEventType)eventType frame:(CGRect)keyboardRect animationDuration:(NSTimeInterval)animationDuration animationOption:(UIViewAnimationCurve)animationOption;
 
 @end
