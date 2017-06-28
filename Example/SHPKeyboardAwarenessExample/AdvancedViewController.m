@@ -30,7 +30,7 @@
     [self setupSubviews];
     
     // Subscribe to keyboard events. The receiver (self in this case) will be automatically unsubscribed when deallocated
-    self.keyboardAwareness = [SHPKeyboardAwarenessObserver ObserveView:self.containerView observerSuperView:self.view];
+    self.keyboardAwareness = [SHPKeyboardAwarenessObserver observeView:self.containerView observerSuperView:self.view];
     self.keyboardAwareness.delegate = self;
 }
 

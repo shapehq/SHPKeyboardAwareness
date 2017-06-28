@@ -29,8 +29,8 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     // Do any additional setup after loading the view.
-    self.keyboardAwareness = [SHPKeyboardAwarenessObserver ObserveView:self.longTextField withDelegate:self observerSuperView:self.view];
-//    self.keyboardAwareness = [SHPKeyboardAwarenessObserver ObserveScrollView:self.scrollView conflictingViewPadding:20];
+    self.keyboardAwareness = [SHPKeyboardAwarenessObserver observeView:self.longTextField withDelegate:self observerSuperView:self.view];
+//    self.keyboardAwareness = [SHPKeyboardAwarenessObserver observeScrollView:self.scrollView conflictingViewPadding:20];
     
     [self setupSubviews];
 }
