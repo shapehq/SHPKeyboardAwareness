@@ -230,7 +230,7 @@ CGRect shp_normalizedFrame(CGRect frame, UIWindow *window) {
 #pragma mark - Event handling
 - (void)setEventInfo:(SHPEventInfo *)eventInfo {
     SHPKeyboardEvent *keyboardEvent;
-    if( eventInfo.conflictView != nil && eventInfo.keyboardInfo != nil && _eventInfo.keyboardInfo != nil) {
+    if( eventInfo.conflictView != nil && eventInfo.keyboardInfo != nil && _eventInfo.keyboardInfo != nil && _eventInfo.conflictView) {
         // Change view/keyboard or hide keyboard
         // this is at least a second time we are called
 
@@ -253,7 +253,7 @@ CGRect shp_normalizedFrame(CGRect frame, UIWindow *window) {
         }
 
     }
-    else if( eventInfo.conflictView != nil && eventInfo.keyboardInfo != nil && eventInfo.keyboardInfo.eventType == SHPKeyboardEventTypeShow) {
+    else if( eventInfo.conflictView != nil && eventInfo.keyboardInfo != nil && (eventInfo.keyboardInfo.eventType == SHPKeyboardEventTypeShow || _eventInfo.keyboardInfo.eventType == SHPKeyboardEventTypeShow)) {
         // Show keyboard
         keyboardEvent = [self showEventWithKeyboardInfo:eventInfo.keyboardInfo conflictingView:eventInfo.conflictView];
     }
