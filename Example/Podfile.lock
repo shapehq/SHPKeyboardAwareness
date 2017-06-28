@@ -1,5 +1,5 @@
 PODS:
-  - SHPKeyboardAwareness (2.4.1)
+  - SHPKeyboardAwareness (3.1.0)
 
 DEPENDENCIES:
   - SHPKeyboardAwareness (from `../`)
@@ -9,8 +9,8 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  SHPKeyboardAwareness: 7056dd6d1a23d45d1c174d30f257a8d083bd3a08
+  SHPKeyboardAwareness: 0d7cfe8cac9365a26c720af4a346b1157dc25a16
 
 PODFILE CHECKSUM: dc4919f25d8ac7e1e5b1255cd3ff32c348d7e1f4
 
-COCOAPODS: 1.0.1
+COCOAPODS: 1.2.1

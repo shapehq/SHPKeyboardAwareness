@@ -105,31 +105,31 @@ CGRect shp_normalizedFrame(CGRect frame, UIWindow *window) {
 }
 
 #pragma mark - Convenience
-+ (instancetype)ObserveWithObserverSuperView:(UIView *)superView {
++ (instancetype)observeWithObserverSuperView:(UIView *_Nullable)superView {
     return [[SHPKeyboardAwarenessObserver alloc] initWithObserveView:nil delegate:nil observerSuperView:superView];
 }
 
-+ (instancetype)ObserveWithDelegate:(id <SHPKeyboardAwarenessClient> _Nullable)delegate observerSuperView:(UIView * _Nullable)superView {
++ (instancetype)observeWithDelegate:(id <SHPKeyboardAwarenessClient> _Nullable)delegate observerSuperView:(UIView * _Nullable)superView {
     return [[SHPKeyboardAwarenessObserver alloc] initWithObserveView:nil delegate:delegate observerSuperView:superView];
 }
 
-+ (instancetype)ObserveView:(UIView *_Nullable)view observerSuperView:(UIView * _Nullable)superView {
++ (instancetype)observeView:(UIView *_Nullable)view observerSuperView:(UIView * _Nullable)superView {
     return [[SHPKeyboardAwarenessObserver alloc] initWithObserveView:view delegate:nil observerSuperView:superView];
 }
 
-+ (instancetype)ObserveView:(UIView *_Nullable)view withDelegate:(id <SHPKeyboardAwarenessClient> _Nullable)delegate observerSuperView:(UIView * _Nullable)superView {
++ (instancetype)observeView:(UIView *_Nullable)view withDelegate:(id <SHPKeyboardAwarenessClient> _Nullable)delegate observerSuperView:(UIView * _Nullable)superView {
     return [[SHPKeyboardAwarenessObserver alloc] initWithObserveView:view delegate:delegate observerSuperView:superView];
 }
 
-+ (instancetype _Nonnull)ObserveScrollView: (UIScrollView *_Nonnull)view conflictingViewPadding: (CGFloat)padding {
-    SHPKeyboardAwarenessScrollViewClient *observerClient = [SHPKeyboardAwarenessScrollViewClient ClientWithView: view conflictingViewPadding: padding];
++ (instancetype _Nonnull)observeScrollView:(UIScrollView *_Nonnull)view conflictingViewPadding: (CGFloat)padding {
+    SHPKeyboardAwarenessScrollViewClient *observerClient = [SHPKeyboardAwarenessScrollViewClient clientWithView:view conflictingViewPadding:padding];
     SHPKeyboardAwarenessObserver *observer = [[SHPKeyboardAwarenessObserver alloc] initWithObserveView:nil delegate:observerClient observerSuperView:view];
     observer.client = observerClient;
     return observer;
 }
 
-+ (instancetype _Nonnull)ObserveView: (UIView *_Nonnull)view verticalConstraint: (NSLayoutConstraint *_Nonnull)constraint conflictingViewPadding: (CGFloat)padding {
-    SHPKeyboardAwarenessConstraintClient *observerClient = [SHPKeyboardAwarenessConstraintClient ClientWithView: view verticalConstraint: constraint conflictingViewPadding: padding];
++ (instancetype _Nonnull)observeView:(UIView *_Nonnull)view verticalConstraint:(NSLayoutConstraint *_Nonnull)constraint conflictingViewPadding: (CGFloat)padding {
+    SHPKeyboardAwarenessConstraintClient *observerClient = [SHPKeyboardAwarenessConstraintClient clientWithView:view verticalConstraint:constraint conflictingViewPadding:padding];
     SHPKeyboardAwarenessObserver *observer = [[SHPKeyboardAwarenessObserver alloc] initWithObserveView:nil delegate:observerClient observerSuperView:view];
     observer.client = observerClient;
     return observer;
@@ -217,12 +217,12 @@ CGRect shp_normalizedFrame(CGRect frame, UIWindow *window) {
 
     if( [notification.name isEqualToString:UIKeyboardWillShowNotification] ) {
         SHPEventInfo *eventInfoCopy = [self.eventInfo copy];
-        eventInfoCopy.keyboardInfo = [SHPKeyboardInfo InfoWithEventType: SHPKeyboardEventTypeShow frame: keyboardFrame animationDuration: animationDuration animationOption: animationCurve];
+        eventInfoCopy.keyboardInfo = [SHPKeyboardInfo infoWithEventType:SHPKeyboardEventTypeShow frame:keyboardFrame animationDuration:animationDuration animationOption:animationCurve];
         self.eventInfo = eventInfoCopy;
     }
     else if( [notification.name isEqualToString:UIKeyboardWillHideNotification] ) {
         SHPEventInfo *eventInfoCopy = [self.eventInfo copy];
-        eventInfoCopy.keyboardInfo = [SHPKeyboardInfo InfoWithEventType: SHPKeyboardEventTypeHide frame: CGRectZero animationDuration: animationDuration animationOption: animationCurve];
+        eventInfoCopy.keyboardInfo = [SHPKeyboardInfo infoWithEventType:SHPKeyboardEventTypeHide frame:CGRectZero animationDuration:animationDuration animationOption:animationCurve];
         self.eventInfo = eventInfoCopy;
     }
 }

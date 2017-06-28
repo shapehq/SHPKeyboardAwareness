@@ -23,7 +23,7 @@
     if( copy ) {
         copy.conflictView = self.conflictView;
         if( self.keyboardInfo) {
-            copy.keyboardInfo = [SHPKeyboardInfo InfoWithEventType:self.keyboardInfo.eventType frame:self.keyboardInfo.rect animationDuration:self.keyboardInfo.animationDuration animationOption:self.keyboardInfo.animationOption];
+            copy.keyboardInfo = [SHPKeyboardInfo infoWithEventType:self.keyboardInfo.eventType frame:self.keyboardInfo.rect animationDuration:self.keyboardInfo.animationDuration animationOption:self.keyboardInfo.animationOption];
         }
         else {
             copy.keyboardInfo = nil;

@@ -29,7 +29,7 @@
     return self;
 }
 
-+ (SHPKeyboardAwarenessConstraintClient *)ClientWithView:(UIView *)view verticalConstraint:(NSLayoutConstraint *)constraint conflictingViewPadding:(CGFloat)padding {
++ (SHPKeyboardAwarenessConstraintClient *)clientWithView:(UIView *)view verticalConstraint:(NSLayoutConstraint *)constraint conflictingViewPadding:(CGFloat)padding {
     return [[SHPKeyboardAwarenessConstraintClient alloc] initWithView: view verticalConstraint: constraint conflictingViewPadding: padding];
 }
 
