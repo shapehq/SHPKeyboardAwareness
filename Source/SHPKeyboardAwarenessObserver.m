@@ -253,7 +253,7 @@ CGRect shp_normalizedFrame(CGRect frame, UIWindow *window) {
         }
 
     }
-    else if( eventInfo.conflictView != nil && eventInfo.keyboardInfo != nil && (eventInfo.keyboardInfo.eventType == SHPKeyboardEventTypeShow || _eventInfo.keyboardInfo.eventType == SHPKeyboardEventTypeShow)) {
+    else if( eventInfo.conflictView != nil && eventInfo.keyboardInfo != nil && (eventInfo.keyboardInfo.eventType == SHPKeyboardEventTypeShow || _eventInfo.keyboardInfo.eventType == SHPKeyboardEventTypeShow) && eventInfo.keyboardInfo.eventType != SHPKeyboardEventTypeHide) {
         // Show keyboard
         keyboardEvent = [self showEventWithKeyboardInfo:eventInfo.keyboardInfo conflictingView:eventInfo.conflictView];
     }
